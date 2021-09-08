@@ -1,0 +1,17 @@
+- name: Create user Juri 
+  ansible.builtin.user:
+    name: juri 
+
+- name: Create user Roman
+  ansible.builtin.user:
+    name: roman
+
+- name: Juri ssh-key
+  ansible.posix.authorized_key:
+    user: juri 
+    key: https://github.com/hudolejev.keys
+
+- name: Roman ssh-key
+  ansible.posix.authorized_key:
+    user: roman
+    key: https://github.com/romankuchin.keys
