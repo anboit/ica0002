@@ -1,0 +1,10 @@
+- name: nginx and updating
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: replace html
+  ansible.builtin.copy:
+    src: index.html
+    dest: /var/www/html/index.html

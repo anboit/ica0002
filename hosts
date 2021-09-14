@@ -1,4 +1,4 @@
-anboit-1 ansible_host=193.40.156.86 ansible_port=11422 ansible_ssh_user=ubuntu
+anboit-1 ansible_host=193.40.156.86 ansible_port=13722 ansible_ssh_user=ubuntu
 
 [web_servers]
 anboit-1
