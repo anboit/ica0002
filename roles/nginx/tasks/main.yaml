@@ -4,7 +4,19 @@
     state: latest
     update_cache: yes
 
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
 - name: replace html
   ansible.builtin.copy:
     src: index.html
     dest: /var/www/html/index.html
+
+- name: replace default
+  ansible.builtin.copy:
+    src: default
+    dest: /etc/nginx/sites-enabled/default
+  notify: Restart nginx
