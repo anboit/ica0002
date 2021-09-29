@@ -3,10 +3,9 @@
     name: 
       - uwsgi
       - uwsgi-plugin-python3
-    update_cache: yes
 
 - name: Add uWSGI configuration for AGAMA
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: agama.ini
     dest: /etc/uwsgi/apps-enabled/agama.ini
   notify: Restart uWSGI 
@@ -16,3 +15,4 @@
     name: uwsgi
     state: started
     enabled: yes
+

@@ -2,7 +2,6 @@
   apt:
     name: nginx
     state: latest
-    update_cache: yes
 
 - name: start nginx
   service:
