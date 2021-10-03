@@ -1,0 +1,21 @@
+---
+- name: bind package
+  apt:
+    name: bind9 
+    update_cache: yes
+
+- template:
+    src: named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify:
+    restart bind
+
+- template: 
+    src: db.reily
+    dest: /var/cache/bind/db.reily
+
+- template:
+    src: named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify:
+    restart bind

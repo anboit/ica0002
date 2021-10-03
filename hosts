@@ -1,8 +1,8 @@
-anboit-1 ansible_host=193.40.156.86 ansible_port=2022 ansible_ssh_user=ubuntu
-anboit-2 ansible_host=193.40.156.86 ansible_port=11422 ansible_ssh_user=ubuntu
+vm1 ansible_host=193.40.156.86 ansible_port=12122 ansible_ssh_user=ubuntu
+vm2 ansible_host=193.40.156.86 ansible_port=10922 ansible_ssh_user=ubuntu
 
 [db_servers]
-anboit-2
+vm2
 
 [web_servers]
-anboit-1
+vm1

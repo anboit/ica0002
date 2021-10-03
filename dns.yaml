@@ -1,0 +1,6 @@
+---
+- name: DNS server
+  hosts: vm2
+  become: yes
+  roles: 
+    - bind
