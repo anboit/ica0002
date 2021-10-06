@@ -6,7 +6,7 @@ acl lan {
 options {
         directory "/var/cache/bind";
         forwarders {
-           {%- for n in port_forwarders %}
+           {% for n in port_forwarders %}
            {{ n -}};
            {% endfor %}
         };

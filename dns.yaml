@@ -1,6 +1,20 @@
 ---
+- name: Collect info about all VMs
+  hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+    - setup:
+
+- name: change nameserver on vms
+  hosts: all
+  become: yes
+  gather_facts: no 
+  roles:
+    - dns_resolv
+
 - name: DNS server
-  hosts: vm2
+  hosts: dns_servers
   become: yes
   roles: 
     - bind

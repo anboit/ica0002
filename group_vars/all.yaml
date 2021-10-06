@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.114
+mysql_host: vm2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -18,3 +18,7 @@ port_forwarders:
 acl_lan_networks:
   - 192.168.42.0/24
   - 127.0.0.0/8
+
+domain_name: reily.tech
+
+
