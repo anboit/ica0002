@@ -2,7 +2,6 @@
 - name: bind package
   apt:
     name: bind9 
-    update_cache: yes
 
 - template:
     src: named.conf.options.j2
@@ -12,7 +11,7 @@
 
 - template: 
     src: db.reily.j2
-    dest: /var/cache/bind/db.reily
+    dest: /var/cache/bind/db.reily.j2
 
 - template:
     src: named.conf.local.j2
