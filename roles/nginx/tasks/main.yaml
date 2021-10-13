@@ -15,7 +15,7 @@
     dest: /var/www/html/index.html
 
 - name: replace default
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: default
     dest: /etc/nginx/sites-enabled/default
   notify: Restart nginx
