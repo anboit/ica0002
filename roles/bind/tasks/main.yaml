@@ -1,6 +1,6 @@
 ---
 - name: bind package
-  apt:
+  ansible.builtin.apt:
     name: bind9 
 
 - template:

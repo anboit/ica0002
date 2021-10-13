@@ -4,12 +4,33 @@
       - web_servers
       - db_servers
     become: yes
+    gather_facts: no
     roles:
       - init
 
+  - name: Collect info about all VMs
+    hosts: all
+    become: yes
+    gather_facts: yes
+    tasks:
+      - setup:
+
+  - name: DNS server
+    hosts: dns_servers
+    become: yes
+    roles: 
+      - bind
+
+  - name: change nameserver on vms
+    hosts: all
+    become: yes
+    roles:
+      - dns_resolv
+
   - name: Database server
     hosts: db_servers
-    become: yes   
+    become: yes
+    gather_facts: no
     roles:
       - mysql
 
@@ -21,5 +42,15 @@
       - agama
       - uwsgi
       - nginx
+      - prometheus
+
+  - name: prometheus node exporter
+    hosts: all
+    become: yes
+    roles:
+      - node_exporter
+
+
+
 
 

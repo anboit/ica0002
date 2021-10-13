@@ -1,5 +1,5 @@
-vm1 ansible_host=193.40.156.86 ansible_port=17522 ansible_ssh_user=ubuntu
-vm2 ansible_host=193.40.156.86 ansible_port=10622 ansible_ssh_user=ubuntu
+vm1 ansible_host=193.40.156.86 ansible_port=8822 ansible_ssh_user=ubuntu
+vm2 ansible_host=193.40.156.86 ansible_port=13222 ansible_ssh_user=ubuntu
 
 [dns_servers]
 vm2
@@ -9,3 +9,9 @@ vm2
 
 [web_servers]
 vm1
+
+[prometheus]
+vm1
+
+[all:vars]
+ansible_host=193.40.156.86

@@ -14,7 +14,6 @@
     name: 
       - python3-flask-sqlalchemy
       - python3-pymysql 
-    update_cache: yes
 
 - name: Install AGAMA
   ansible.builtin.get_url: 

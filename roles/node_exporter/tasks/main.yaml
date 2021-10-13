@@ -1,0 +1,10 @@
+---
+- name: prometheus node exporter
+  ansible.builtin.apt:
+    name: prometheus-node-exporter
+
+- name: Start prometheus node exporters on boot
+  ansible.builtin.service:
+    name: prometheus-node-exporter
+    state: started
+    enabled: yes
