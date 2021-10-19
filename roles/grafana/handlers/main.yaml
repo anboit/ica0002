@@ -1,0 +1,11 @@
+---
+- name: restart grafana
+  service:
+    name: grafana-server
+    state: restarted
+
+- name: change admin pass
+  shell: |
+    sleep 30
+    grafana-cli admin reset-admin-password {{grafana_password}}
+

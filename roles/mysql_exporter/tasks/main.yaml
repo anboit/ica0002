@@ -1,0 +1,16 @@
+---
+- name: prometheus mysql exporter
+  ansible.builtin.apt:
+    name: prometheus-mysqld-exporter
+
+- name: Start prometheus mysql exporters on boot
+  ansible.builtin.service:
+    name: prometheus-mysqld-exporter
+    state: started
+    enabled: yes
+
+- name: Move my.cnf.j2 file
+  template:
+    src: my.cnf.j2
+    dest: /var/lib/prometheus/.my.cnf
+  notify: Restart mysql_exporter

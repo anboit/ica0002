@@ -1,0 +1,10 @@
+---
+- name: prometheus bind exporter
+  ansible.builtin.apt:
+    name: prometheus-bind-exporter
+
+- name: Start prometheus bind exporters on boot
+  ansible.builtin.service:
+    name: prometheus-bind-exporter
+    state: started
+    enabled: yes

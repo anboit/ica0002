@@ -1,0 +1,2 @@
+rate(node_cpu_seconds_total{mode="user"}[1m])
+rate(node_memory_Active_bytes{mode="user"}[1m])

@@ -13,8 +13,10 @@
   ansible.builtin.template:
     src: prometheus
     dest: /etc/default/prometheus
+  notify: restart prometheus
 
 - name: Change /etc/prometheus/prometheus.yml
   ansible.builtin.template:
     src: prometheus.yml
     dest: /etc/prometheus/prometheus.yml
+  notify: restart prometheus

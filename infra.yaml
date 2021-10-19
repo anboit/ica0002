@@ -18,12 +18,16 @@
   - name: DNS server
     hosts: dns_servers
     become: yes
+    gather_facts: no
     roles: 
       - bind
+      - bind_exporter
+    
 
   - name: change nameserver on vms
     hosts: all
     become: yes
+    gather_facts: no
     roles:
       - dns_resolv
 
@@ -33,22 +37,34 @@
     gather_facts: no
     roles:
       - mysql
+      - mysql_exporter
 
   - name: Web server
     hosts: web_servers
     become: yes
+    gather_facts: no
     roles:
       # - users
       - agama
       - uwsgi
       - nginx
+      - nginx_exporter
       - prometheus
+      
 
   - name: prometheus node exporter
     hosts: all
     become: yes
+    gather_facts: no
     roles:
       - node_exporter
+
+  - name: Grafana
+    hosts: grafana
+    become: yes
+    gather_facts: no
+    roles:
+      - grafana
 
 
 
