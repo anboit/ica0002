@@ -20,4 +20,9 @@ server {
        proxy_pass http://localhost:3000;
 	}
 {% endif %}
+{% if inventory_hostname in groups['influxdb'] %}
+	location /influxdb {
+       proxy_pass http://localhost:9224;
+	}
+{% endif %}
 }

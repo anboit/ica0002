@@ -23,10 +23,15 @@
     path: /var/lib/grafana/dashboards
     state: directory
 
-- name: copy grafana conf
+- name: copy main dashboard
   copy:
     src: main.json
     dest: /var/lib/grafana/dashboards/main.json
+
+- name: copy syslog dashboard
+  copy:
+    src: syslog.json
+    dest: /var/lib/grafana/dashboards/syslog.json
   
 - name: copy grafana datasource
   template:

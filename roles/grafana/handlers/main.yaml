@@ -8,4 +8,5 @@
   shell: |
     sleep 30
     grafana-cli admin reset-admin-password {{grafana_password}}
+  no_log: true 
 

@@ -1,0 +1,11 @@
+[Unit]
+Description=Pinger service configuration file
+Documentation=https://github.com/romankuchin/ica0002-2021/blob/main/08-logging/08-files/pinger.service
+After=network-online.target
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/pinger
+
+[Install]
+WantedBy=multi-user.target

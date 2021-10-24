@@ -20,3 +20,21 @@ datasources:
     isDefault: true
     version: 1
     editable: false
+
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://vm1:8086
+    database: latency
+    version: 1
+    editable: false
+
+  - name: InfluxDB-telegraf
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://vm1:8086
+    database: telegraf
+    version: 1
+    editable: false

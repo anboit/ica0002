@@ -50,14 +50,23 @@
       - nginx
       - nginx_exporter
       - prometheus
-      
 
-  - name: prometheus node exporter
+  - name: influxDB
+    hosts: influxdb
+    become: yes
+    gather_facts: no
+    roles:
+      - influxdb
+      - pinger
+      - influxdb_exporter
+
+  - name: prometheus node exporter and rsyslog
     hosts: all
     become: yes
     gather_facts: no
     roles:
       - node_exporter
+      - rsyslog
 
   - name: Grafana
     hosts: grafana
