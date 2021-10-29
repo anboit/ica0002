@@ -1,23 +1,37 @@
-This document describes a Service Level Agreement (SLA).
+This document describes a backup Service Level Agreement (SLA).
 
+---------------
 Backup coverage
 
-Database servers, InfluxDB, Ansible repository - backed up
-Nginx, AGAMA, Grafana, Bind - not backed up
-r 
+Services that can be restored using manual restoration from backup of ansibe playbooks:
+- Web services (Nginx) - covered by ansible repository
+- App services (Agama application) - covered by ansible repository
+- Database services (InfluxDB, MySQL) - backed up daily 
+- DNS services (Bind9) - covered by ansible repository
+- Monitoring services - grafana dashboard and exporters are covered by ansible repository
+- Ansible repository itself - backed up daily
 
+------------------------------
 RPO (recovery point objective)
-One day - 
+The backup will restore the database to an identical point no more than one day in the past.
 
-Versioning and retention -- how many backup versions are stored and for how long
-In our infrastructure incremental way of backup will be used as a daily backup version. An incremental backup is one in which successive copies of the data contain only the portion that has changed since the preceding backup copy was made. Differential backup will be used once in a week
+------------------------
+Versioning and retention
+Local backup is made once a day at 3:30 in the morning. Includes: InfluxDB, MySQL and ansible repository.
+Local backups are deleted once a day right before new backup is made. Includes: InfluxDB, MySQL and ansible repository.
 
-Usability checks -- how is backup usability verified
+Full backup is made every Sunday at 3:30 in the morning. Includes: InfluxDB, MySQL and ansible repository.
+Full backups are kept for one month. Includes: InfluxDB, MySQL and ansible repository.
 
+----------------
+Usability checks
+Backup recovery can be verified by using administration tools on virtual environment comparing database dump to live database. 
 
-Restoration criteria -- when should backup be restored
+--------------------
+Restoration criteria
 Restoration occurs only at the time when there is an actual problem with the service that could not be reversed. 
-These include: files deleted by an accident, damaged files.
+These include: files deleted by an accident, damaged files, data loss, security breach (malware, ransomware).
 
+-----------------------------
 RTO (recovery time objective)
-Service restoration time is one hour
+Since our infrastructure is pretty small - restoring of a backup will take no longer than 2 hours to guarantee minimal process downtimes.

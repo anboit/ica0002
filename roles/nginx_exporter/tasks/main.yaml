@@ -2,9 +2,4 @@
 - name: prometheus nginx exporter
   ansible.builtin.apt:
     name: prometheus-nginx-exporter
-
-- name: Start prometheus nginx exporters on boot
-  ansible.builtin.service:
-    name: prometheus-nginx-exporter
-    state: started
-    enabled: yes
+  notify: Start prometheus nginx exporters on boot
