@@ -8,6 +8,9 @@
   template:
     src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
+    owner: prometheus
+    group: prometheus
+    mode: u=r,g=,o=
   notify: Restart mysql_exporter
 
 - name: Pause for 10 seconds

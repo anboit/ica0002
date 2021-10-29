@@ -1,12 +1,12 @@
 ---
   - name: Init
     hosts: 
-      - web_servers
-      - db_servers
+      - all
     become: yes
     gather_facts: no
     roles:
       - init
+      - backup
 
   - name: Collect info about all VMs
     hosts: all
@@ -50,6 +50,14 @@
       - nginx
       - nginx_exporter
       - prometheus
+  
+  - name: Nginx
+    hosts: vm2
+    become: yes
+    gather_facts: no
+    roles:
+      - nginx
+      - nginx_exporter
 
   - name: influxDB
     hosts: influxdb
@@ -67,6 +75,7 @@
     roles:
       - node_exporter
       - rsyslog
+      
 
   - name: Grafana
     hosts: grafana

@@ -2,9 +2,16 @@
 - name: prometheus node exporter
   ansible.builtin.apt:
     name: prometheus-node-exporter
+  register: node_exporter_installed
 
 - name: Start prometheus node exporters on boot
   ansible.builtin.service:
     name: prometheus-node-exporter
     state: started
     enabled: yes
+
+- name: Pause for 10 seconds
+  pause: 
+    seconds: 10
+  when: node_exporter_installed.changed
+  
