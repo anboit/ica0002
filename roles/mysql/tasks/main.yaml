@@ -35,9 +35,10 @@
   
 - name: Create user exporter
   community.mysql.mysql_user:
-    name: exporter
+    name: "{{ exporter_user }}"
     password: "{{mysql_exporter_pass}}"
     priv:
       '*.*': 'PROCESS,REPLICATION CLIENT,SELECT'
     login_unix_socket: /var/run/mysqld/mysqld.sock
+
 

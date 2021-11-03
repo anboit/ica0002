@@ -1,0 +1,27 @@
+- name: Create directory 
+  file:
+    path: /home/backup/mysql
+    state: directory
+    mode: "0700"
+    owner: backup
+    group: backup
+
+- name: Create user backup
+  community.mysql.mysql_user:
+    name: "{{ backup_user }}"
+    password: "{{backup_password}}"
+    priv:
+      '*.*': 'LOCK TABLES,SELECT'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Move .my.cnf file
+  template:
+    src: .my.cnf
+    dest: /home/backup/.my.cnf
+    owner: backup
+    group: backup
+
+- name: Create file mysql-backup
+  ansible.builtin.template:
+    src: mysql-backup
+    dest: /etc/cron.d/mysql-backup

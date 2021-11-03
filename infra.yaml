@@ -8,6 +8,7 @@
       - init
       - backup
 
+
   - name: Collect info about all VMs
     hosts: all
     become: yes
@@ -38,6 +39,7 @@
     roles:
       - mysql
       - mysql_exporter
+      - mysql_backup
 
   - name: Web server
     hosts: web_servers
@@ -67,6 +69,7 @@
       - influxdb
       - pinger
       - influxdb_exporter
+      - influxdb_backup
 
   - name: prometheus node exporter and rsyslog
     hosts: all
