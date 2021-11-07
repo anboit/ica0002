@@ -5,3 +5,8 @@
     mode: "0700"
     owner: backup
     group: backup
+
+- name: Create file mysql-backup
+  ansible.builtin.template:
+    src: influxdb-backup
+    dest: /etc/cron.d/influxdb-backup

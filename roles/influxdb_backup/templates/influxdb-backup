@@ -1,0 +1,1 @@
+* * * * * rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb

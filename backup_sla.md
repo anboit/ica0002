@@ -9,7 +9,7 @@ Services that can be restored using manual restoration from backup of ansibe pla
 - Database services (InfluxDB, MySQL) - backed up daily 
 - DNS services (Bind9) - covered by ansible repository
 - Monitoring services - grafana dashboard and exporters are covered by ansible repository
-- Ansible repository itself - backed up daily
+- Ansible repository itself - backed up by github
 
 ------------------------------
 RPO (recovery point objective)

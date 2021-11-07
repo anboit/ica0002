@@ -19,6 +19,7 @@ acl_lan_networks:
   - 192.168.42.0/24
   - 127.0.0.0/8
 
+github_username: anboit
 domain_name: reily.tech
 
 exporter_user: exporter

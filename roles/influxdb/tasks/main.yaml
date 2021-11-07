@@ -34,4 +34,4 @@
 - name: copy influxdb.conf
   template:
     src: influxdb.conf
-    dest: /etc/telegraf/influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
