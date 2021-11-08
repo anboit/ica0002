@@ -21,8 +21,8 @@ First one restores the backup from the server:
 ```sudo duplicity --no-encryption restore rsync://anboit@backup.reily.tech//home/anboit /home/backup/restore```
 
 To restore the backup you will need to delete existing telegraf database first. It also makes sense to stop the Telegraf service so that it doesn't recreate the database before you could restore it:
-```service telegraf stop```
-```influx -execute 'DROP DATABASE telegraf'```
+```service telegraf stop```<br>
+```influx -execute 'DROP DATABASE telegraf'```<br>
 ```influxd restore -portable -database telegraf /home/backup/influxdb```
 
 ----------------------------------------
