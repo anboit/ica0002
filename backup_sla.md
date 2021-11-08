@@ -1,6 +1,5 @@
-This document describes a backup Service Level Agreement (SLA).
+------ This document describes a backup Service Level Agreement (SLA) ------
 
----------------
 Backup coverage
 
 Services that can be restored using manual restoration from backup of ansibe playbooks:
@@ -12,26 +11,34 @@ Services that can be restored using manual restoration from backup of ansibe pla
 - Ansible repository itself - backed up by github
 
 ------------------------------
+
 RPO (recovery point objective)
 The backup will restore the database to an identical point no more than one day in the past.
 
 ------------------------
-Versioning and retention
-Local backup is made once a day at 3:30 in the morning. Includes: InfluxDB, MySQL and ansible repository.
-Local backups are deleted once a day right before new backup is made. Includes: InfluxDB, MySQL and ansible repository.
 
-Full backup is made every Sunday at 3:30 in the morning. Includes: InfluxDB, MySQL and ansible repository.
-Full backups are kept for one month. Includes: InfluxDB, MySQL and ansible repository.
+Versioning and retention
+Local backup is made once a day at 03:00 in the morning. Includes: InfluxDB, MySQL.
+Local backups are deleted once a day right before new backup is made.
+
+Full backup is made every Sunday at 03:30 in the morning. Includes: InfluxDB, MySQL.
+Full backups are kept for one month.
+
+Incremental backup is made at 03:30 on every day-of-week from Monday through Saturday. Includes: InfluxDB, MySQL.
+Incremental backups are kept for one week.
 
 ----------------
+
 Usability checks
 Backup recovery can be verified by using administration tools on virtual environment comparing database dump to live database. 
 
 --------------------
+
 Restoration criteria
 Restoration occurs only at the time when there is an actual problem with the service that could not be reversed. 
 These include: files deleted by an accident, damaged files, data loss, security breach (malware, ransomware).
 
 -----------------------------
+
 RTO (recovery time objective)
 Since our infrastructure is pretty small - restoring of a backup will take no longer than 2 hours to guarantee minimal process downtimes.
