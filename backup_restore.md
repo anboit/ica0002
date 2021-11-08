@@ -1,11 +1,11 @@
------- BACKUP RESTORE INSTRUCTION ------
+**------ Backup restore instruction ------**
 
 Run Ansible playbook to install all the necessary configurations, run this command from the ica0002 on your machine.<br>
 ```ansible-playbook```
 
 ----------------------------------------
 
-To restore MySQL database you will have to run commands as root on the second virtual machine where our MySQL configuration is made. 
+To restore **MySQL** database you will have to run commands as root on the second virtual machine where our MySQL configuration is made. 
 
 First one restores the backup from the server:<br>
 ```sudo duplicity --no-encryption restore rsync://anboit@backup.reily.tech//home/anboit /home/backup/restore```
@@ -15,7 +15,7 @@ Second uploads the restore backup onto the machine:<br>
 
 ----------------------------------------
 
-To restore InfluxDB database you will have to run commands as root on the first virtual machine where our InfluxDB configuration is made.
+To restore **InfluxDB** database you will have to run commands as root on the first virtual machine where our InfluxDB configuration is made.
 
 First one restores the backup from the server:<br>
 ```sudo duplicity --no-encryption restore rsync://anboit@backup.reily.tech//home/anboit /home/backup/restore```
