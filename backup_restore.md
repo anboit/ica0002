@@ -27,5 +27,5 @@ To restore the backup you will need to delete existing telegraf database first. 
 
 ----------------------------------------
 
-After you have verified that backup was restored successfully, run this command from the ica0002 on your machine, it will start the telegraf service again.
+After you have verified that backup was restored successfully, run this command from the ica0002 on your machine, it will start the telegraf service again:<br>
 ```ansible-playbook infra.yaml```
