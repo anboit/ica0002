@@ -6,7 +6,7 @@
     owner: backup
     group: backup
 
-- name: Create file mysql-backup
+- name: Create file influxdb-backup
   ansible.builtin.template:
     src: influxdb-backup
     dest: /etc/cron.d/influxdb-backup

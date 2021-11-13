@@ -5,22 +5,24 @@ Run Ansible playbook to install all the necessary configurations, run this comma
 
 ----------------------------------------
 
-To restore **MySQL** database you will have to run commands as root on the second virtual machine where our MySQL configuration is made. 
+To restore **MySQL** database you will have to run commands on the second virtual machine where our MySQL configuration is made. 
 
-First one restores the backup from the server:<br>
-```sudo duplicity --no-encryption restore rsync://anboit@backup.reily.tech//home/anboit /home/backup/restore```
+First one restores the backup from the server, run this command as backup user:<br>
+```sudo su - backup``` 
+```duplicity --no-encryption restore rsync://anboit@backup.reily.tech//home/anboit /home/backup/restore```
 
-Second uploads the restore backup onto the machine:<br>
+Second uploads the restore backup onto the machine, run this command from root user:<br>
 ```mysql agama < /home/backup/mysql/agama.sql```
 
 ----------------------------------------
 
 To restore **InfluxDB** database you will have to run commands as root on the first virtual machine where our InfluxDB configuration is made.
 
-First one restores the backup from the server:<br>
-```sudo duplicity --no-encryption restore rsync://anboit@backup.reily.tech//home/anboit /home/backup/restore```
+First one restores the backup from the server, run this command as backup user:<br>
+```sudo su - backup```
+```duplicity --no-encryption restore rsync://anboit@backup.reily.tech//home/anboit /home/backup/restore```
 
-To restore the backup you will need to delete existing telegraf database first. It also makes sense to stop the Telegraf service so that it doesn't recreate the database before you could restore it:<br>
+To restore the backup you will need to delete existing telegraf database first. It also makes sense to stop the Telegraf service so that it doesn't recreate the database before you could restore it, run these commands from root user:<br>
 ```service telegraf stop```<br>
 ```influx -execute 'DROP DATABASE telegraf'```<br>
 ```influxd restore -portable -database telegraf /home/backup/influxdb```

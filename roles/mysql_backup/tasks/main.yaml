@@ -23,5 +23,5 @@
 
 - name: Create file mysql-backup
   ansible.builtin.template:
-    src: mysql-backup
-    dest: /etc/cron.d/mysql-backup
+    src: mysql-backup.j2
+    dest: /etc/cron.d/mysql-backup.j2

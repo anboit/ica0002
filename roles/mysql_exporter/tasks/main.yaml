@@ -8,6 +8,12 @@
     mode: 0600
   notify: Restart mysql_exporter
 
+- name: Move template
+  template:
+    src: prometheus-mysqld-exporter
+    dest: /etc/default/prometheus-mysqld-exporter
+  notify: Restart mysql_exporter
+
 - name: prometheus mysql exporter
   ansible.builtin.apt:
     name: prometheus-mysqld-exporter

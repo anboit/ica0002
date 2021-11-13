@@ -3,14 +3,8 @@
     name: mysql-server
     state: present
 
-- name: start mysql-server on boot
-  service:
-    name: mysql
-    state: started
-    enabled: yes
-
 - name: override mysql configuration
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: override.cnf
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify: Restart mysql
@@ -19,6 +13,12 @@
   ansible.builtin.apt:
     name: python3-pymysql
     state: latest
+
+- name: start mysql-server on boot
+  service:
+    name: mysql
+    state: started
+    enabled: yes
 
 - name: MySQL database
   community.mysql.mysql_db:
@@ -36,9 +36,27 @@
 - name: Create user exporter
   community.mysql.mysql_user:
     name: "{{ exporter_user }}"
-    password: "{{mysql_exporter_pass}}"
+    password: "{{ mysql_exporter_pass }}"
     priv:
       '*.*': 'PROCESS,REPLICATION CLIENT,SELECT'
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-
+- name: Create MySQL user for replication
+  community.mysql.mysql_user:
+    name: "{{ mysql_replication_user }}"
+    password: "{{ mysql_replication_pass }}"
+    host: "%"
+    priv:
+      "*.*:REPLICATION SLAVE"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    
+- name: readonly
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify:
+  - Reset MySQL source
+  - Reset MySQL replica
+  

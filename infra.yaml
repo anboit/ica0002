@@ -7,7 +7,8 @@
     roles:
       - init
       - backup
-
+      - node_exporter
+      - rsyslog
 
   - name: Collect info about all VMs
     hosts: all
@@ -24,7 +25,6 @@
       - bind
       - bind_exporter
     
-
   - name: change nameserver on vms
     hosts: all
     become: yes
@@ -46,15 +46,12 @@
     become: yes
     gather_facts: no
     roles:
-      # - users
       - agama
       - uwsgi
-      - nginx
-      - nginx_exporter
       - prometheus
-  
+
   - name: Nginx
-    hosts: vm2
+    hosts: all
     become: yes
     gather_facts: no
     roles:
@@ -70,15 +67,6 @@
       - pinger
       - influxdb_exporter
       - influxdb_backup
-
-  - name: prometheus node exporter and rsyslog
-    hosts: all
-    become: yes
-    gather_facts: no
-    roles:
-      - node_exporter
-      - rsyslog
-      
 
   - name: Grafana
     hosts: grafana

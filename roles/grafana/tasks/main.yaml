@@ -32,6 +32,11 @@
   copy:
     src: syslog.json
     dest: /var/lib/grafana/dashboards/syslog.json
+
+- name: copy MySQL dashboard
+  copy:
+    src: mysql.json
+    dest: /var/lib/grafana/dashboards/mysql.json
   
 - name: copy grafana datasource
   template:
