@@ -1,0 +1,57 @@
+---
+- name: Add an Apt signing key, uses whichever key is at the URL
+  ansible.builtin.apt_key:
+    url: https://packages.grafana.com/gpg.key
+
+- name: Add specified repository into sources list
+  ansible.builtin.apt_repository:
+    repo: deb https://packages.grafana.com/oss/deb stable main
+
+- name: install grafana
+  ansible.builtin.apt:
+    name: grafana
+  notify: change admin pass
+
+- name: Start grafana on boot
+  ansible.builtin.service:
+    name: grafana-server
+    state: started
+    enabled: yes
+
+- name: Create Dictonary 
+  ansible.builtin.file:
+    path: /var/lib/grafana/dashboards
+    state: directory
+
+- name: copy main dashboard
+  copy:
+    src: main.json
+    dest: /var/lib/grafana/dashboards/main.json
+
+- name: copy syslog dashboard
+  copy:
+    src: syslog.json
+    dest: /var/lib/grafana/dashboards/syslog.json
+
+- name: copy MySQL dashboard
+  copy:
+    src: mysql.json
+    dest: /var/lib/grafana/dashboards/mysql.json
+  
+- name: copy grafana datasource
+  template:
+    src: sample.yaml
+    dest: /etc/grafana/provisioning/datasources/sample.yaml
+  notify: restart grafana
+
+- name: copy grafana dashboard
+  template:
+    src: main.yaml
+    dest: /etc/grafana/provisioning/dashboards/main.yaml
+  notify: restart grafana
+
+- name: copy grafana ini
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  notify: restart grafana
