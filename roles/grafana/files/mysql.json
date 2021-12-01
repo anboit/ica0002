@@ -1,510 +1,510 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": "-- Grafana --",
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [],
-            "type": "dashboard"
-          },
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
           "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Syslog",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "😡"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "🐸"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mysql_up",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
         }
-      ]
+      ],
+      "title": "MySQL server status",
+      "type": "stat"
     },
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "gnetId": null,
-    "graphTooltip": 0,
-    "id": 3,
-    "links": [
-      {
-        "asDropdown": false,
-        "icon": "external link",
-        "includeVars": false,
-        "keepTime": false,
-        "tags": [],
-        "targetBlank": false,
-        "title": "Syslog",
-        "tooltip": "",
-        "type": "dashboards",
-        "url": ""
-      }
-    ],
-    "liveNow": false,
-    "panels": [
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
               {
-                "options": {
-                  "0": {
-                    "color": "red",
-                    "index": 1,
-                    "text": "😡"
-                  },
-                  "1": {
-                    "color": "green",
-                    "index": 0,
-                    "text": "✅"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "max": 1,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 14,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "vertical",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "value"
-        },
-        "pluginVersion": "8.2.3",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "mysql_up",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "title": "MySQL server status",
-        "type": "stat"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "max": 1,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 24,
-          "x": 0,
-          "y": 3
-        },
-        "id": 12,
-        "options": {
-          "colorMode": "none",
-          "graphMode": "none",
-          "justifyMode": "center",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "value"
-        },
-        "pluginVersion": "8.2.3",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "mysql_global_variables_server_id",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "title": "MySQL server id",
-        "type": "stat"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "0": {
-                    "color": "orange",
-                    "index": 1,
-                    "text": "Read/write"
-                  },
-                  "1": {
-                    "color": "blue",
-                    "index": 0,
-                    "text": "Read only"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "max": 1,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 24,
-          "x": 0,
-          "y": 6
-        },
-        "id": 13,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "value"
-        },
-        "pluginVersion": "8.2.3",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "mysql_global_variables_read_only",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "title": "MySQL server mode",
-        "type": "stat"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "0": {
-                    "color": "orange",
-                    "index": 1,
-                    "text": "Stopped"
-                  },
-                  "1": {
-                    "color": "blue",
-                    "index": 0,
-                    "text": "Running"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "max": 1,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 24,
-          "x": 0,
-          "y": 9
-        },
-        "id": 16,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "value"
-        },
-        "pluginVersion": "8.2.3",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "mysql_slave_status_slave_io_running",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "title": "MySQL replica IO thread",
-        "type": "stat"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [
-              {
-                "options": {
-                  "0": {
-                    "color": "#FF9830",
-                    "index": 1,
-                    "text": "Stopped"
-                  },
-                  "1": {
-                    "color": "blue",
-                    "index": 0,
-                    "text": "Running"
-                  }
-                },
-                "type": "value"
-              }
-            ],
-            "max": 1,
-            "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 24,
-          "x": 0,
-          "y": 12
-        },
-        "id": 17,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "value"
-        },
-        "pluginVersion": "8.2.3",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "mysql_slave_status_slave_sql_running",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "title": "MySQL replica SQL thread",
-        "type": "stat"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
+                "color": "red",
+                "value": null
               },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
+              {
+                "color": "green",
+                "value": 1
               }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "ops"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 15
-        },
-        "id": 15,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "single"
+            ]
           }
         },
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "rate(mysql_global_status_commands_total{command=~\"select|show_status|update\"}[5m])",
-            "interval": "",
-            "legendFormat": "{{instance}}: {{command}}",
-            "refId": "A"
-          }
-        ],
-        "title": "MySQL query rate",
-        "type": "timeseries"
-      }
-    ],
-    "refresh": "30s",
-    "schemaVersion": 31,
-    "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": []
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mysql_global_variables_server_id",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "MySQL server id",
+      "type": "stat"
     },
-    "time": {
-      "from": "now-1h",
-      "to": "now"
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Read/write"
+                },
+                "1": {
+                  "color": "blue",
+                  "index": 0,
+                  "text": "Read only"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mysql_global_variables_read_only",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "MySQL server mode",
+      "type": "stat"
     },
-    "timepicker": {},
-    "timezone": "",
-    "title": "MySQL",
-    "uid": "mysql",
-    "version": 1
-  }
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Stopped"
+                },
+                "1": {
+                  "color": "blue",
+                  "index": 0,
+                  "text": "Running"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mysql_slave_status_slave_io_running",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "MySQL replica IO thread",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "#FF9830",
+                  "index": 1,
+                  "text": "Stopped"
+                },
+                "1": {
+                  "color": "blue",
+                  "index": 0,
+                  "text": "Running"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mysql_slave_status_slave_sql_running",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "MySQL replica SQL thread",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "rate(mysql_global_status_commands_total{command=~\"select|show_status|update\"}[5m])",
+          "interval": "",
+          "legendFormat": "{{instance}}: {{command}}",
+          "refId": "A"
+        }
+      ],
+      "title": "MySQL query rate",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 32,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "MySQL",
+  "uid": "mysql",
+  "version": 1
+}

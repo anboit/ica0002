@@ -1,0 +1,11 @@
+---
+- name: Fix ssl bug for docker
+  ansible.builtin.template:
+    src: iptables.mangle
+    dest: /var/local/iptables.mangle
+
+- name: Restore iptables
+  community.general.iptables_state:
+   path: /var/local/iptables.mangle
+   state: restored
+   table: mangle

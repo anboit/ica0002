@@ -64,3 +64,12 @@ backup_server_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3C
 node_id: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'].split('.')[-1] }}"
 
 grafana_port: 3001
+agama_port_1: 8001
+agama_port_2: 8002
+haproxy_port: 88
+
+
+localhost: 127.0.0.0/8
+docker_network: 172.17.0.0/16
+localnetwork: 192.168.42.0/24
+localhost_address: 127.0.0.1

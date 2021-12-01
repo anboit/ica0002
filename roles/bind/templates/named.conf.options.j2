@@ -1,8 +1,4 @@
-acl lan {
-   {% for n in acl_lan_networks %}
-   {{- n }};
-   {% endfor -%}
- }; 
+acl corpnets { {{ localnetwork }}; {{ localhost }}; }; 
 options {
         directory "/var/cache/bind";
         forwarders {
@@ -10,9 +6,7 @@ options {
            {{ n -}};
            {% endfor %}
         };
-        allow-query {
-            lan;
-        };
+        allow-query { {{ localhost_address }}; {{ localnetwork }}; {{ docker_network }}; };
         dnssec-validation no;
 };
 

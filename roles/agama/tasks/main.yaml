@@ -18,10 +18,19 @@
 - name: Agama Docker Container
   community.docker.docker_container:
     container_default_behavior: no_defaults
-    name: agama
+    name: agama1
     image: agama
-    published_ports: "8001:8000"
+    published_ports: "{{ agama_port_1 }}:8000"
     env:
       AGAMA_DATABASE_URI: mysql+pymysql://{{mysql_user}}:{{mysql_password}}@{{mysql_host}}/{{mysql_database}}
     restart_policy: always
-  no_log: yes
+
+- name: Agama Docker Container
+  community.docker.docker_container:
+    container_default_behavior: no_defaults
+    name: agama2
+    image: agama
+    published_ports: "{{ agama_port_2 }}:8000"
+    env:
+      AGAMA_DATABASE_URI: mysql+pymysql://{{mysql_user}}:{{mysql_password}}@{{mysql_host}}/{{mysql_database}}
+    restart_policy: always

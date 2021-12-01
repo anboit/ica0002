@@ -5,7 +5,7 @@ datasources:
     type: prometheus
     access: proxy
     orgId: 1
-    url: http://vm1:9090/prometheus
+    url: http://vm2:9090/prometheus
     password:
     user:
     database:
@@ -17,7 +17,7 @@ datasources:
     type: influxdb
     access: proxy
     orgId: 1
-    url: http://vm1:8086
+    url: http://vm2:8086
     database: latency
     version: 1
     editable: false
@@ -26,7 +26,7 @@ datasources:
     type: influxdb
     access: proxy
     orgId: 1
-    url: http://vm1:8086
+    url: http://vm2:8086
     database: telegraf
     version: 1
     editable: false

@@ -34,3 +34,9 @@
   notify: 
     - Daemon_reload
     - Restart pinger
+
+- name: Start pinger on boot
+  ansible.builtin.service:
+    name: pinger.service
+    state: started
+    enabled: yes

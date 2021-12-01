@@ -18,7 +18,7 @@
     state: started
     enabled: yes
 
-- name: Create Dictonary 
+- name: Create Directory 
   ansible.builtin.file:
     path: /var/lib/grafana/dashboards
     state: directory

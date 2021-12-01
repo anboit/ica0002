@@ -1,0 +1,33 @@
+---
+- name: Install HAproxy and Keepalived
+  ansible.builtin.apt: 
+    name: keepalived
+
+- name: Copy Keepalived conf file
+  ansible.builtin.template:
+    src: keepalived.conf.j2
+    dest: /etc/keepalived/keepalived.conf
+  notify: restart keepalived
+
+- name: Extract exporter into folder
+  ansible.builtin.unarchive:
+    src: https://github.com/cafebazaar/keepalived-exporter/releases/download/v1.2.0/keepalived-exporter-1.2.0.linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: keepalived exporter service
+  ansible.builtin.template:
+    src: keepalived_exporter.service
+    dest: /etc/systemd/system/keepalived_exporter.service
+  notify: 
+    - Daemon_reload
+    - restart keepalived
+
+- name: Start keepalived on boot
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - keepalived
+    - keepalived_exporter

@@ -41,19 +41,16 @@
       - mysql_exporter
       - mysql_backup
 
-  - name: Docker
-    hosts: docker
-    become: yes
-    gather_facts: no
-    roles:
-      - docker
-
   - name: Web server
     hosts: web_servers
     become: yes
-    gather_facts: no
+    gather_facts: yes
     roles:
+      - ssl
+      - docker
       - agama
+      - haproxy
+      - keepalived
       #- uwsgi
 
   - name: Prometheus 
@@ -81,18 +78,12 @@
       - influxdb_exporter
       - influxdb_backup
 
-  - name: Docker
-    hosts: docker
-    become: yes
-    gather_facts: no
-    roles:
-      - docker
-
   - name: Grafana
     hosts: grafana
     become: yes
     gather_facts: no
     roles:
+      - docker
       - grafana
 
 

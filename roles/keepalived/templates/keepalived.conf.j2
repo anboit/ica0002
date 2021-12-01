@@ -1,0 +1,29 @@
+vrrp_script check_haproxy {                 
+    script "/usr/local/bin/ha88" 
+    weight 20                              
+    interval 1               
+}
+
+vrrp_instance my_ha_frontend {
+    interface ens3
+    virtual_router_id 51
+    {% if inventory_hostname == 'vm1' %}
+    priority 100
+    {% else %}
+    priority 99
+    {% endif%}
+    advert_int 1
+    virtual_ipaddress {
+          192.168.100.{{ (hostvars['vm1']['ansible_default_ipv4']['address'] | split('.'))[3]}}/24
+    }
+    unicast_peer {
+      {% for vm in groups['web_servers'] %}
+      {% if inventory_hostname != vm %}
+      {{ hostvars[vm]['ansible_default_ipv4']['address']}} 
+      {% endif %}
+      {% endfor %}
+    }
+    track_script {
+      check_haproxy
+    }
+}
