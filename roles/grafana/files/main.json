@@ -19,7 +19,7 @@
     ]
   },
   "editable": true,
-  "fiscalYearStartMonth": 0,
+  "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
   "links": [
@@ -36,9 +36,9 @@
       "url": ""
     }
   ],
-  "liveNow": false,
   "panels": [
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -101,7 +101,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.1.8",
       "targets": [
         {
           "datasource": {
@@ -169,6 +169,7 @@
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -254,6 +255,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -262,23 +264,29 @@
           "mappings": [
             {
               "options": {
-                "0": {
-                  "color": "dark-red",
-                  "index": 0,
-                  "text": "Not working"
-                },
                 "1": {
                   "color": "dark-purple",
-                  "index": 1,
+                  "index": 0,
                   "text": "Slave"
                 },
                 "2": {
                   "color": "dark-orange",
-                  "index": 2,
+                  "index": 1,
                   "text": "Master"
                 }
               },
               "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "Not working"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -299,7 +307,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 12,
+        "w": 6,
         "x": 12,
         "y": 5
       },
@@ -311,14 +319,15 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.1.8",
       "targets": [
         {
           "datasource": {
@@ -326,16 +335,18 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "keepalived_vrrp_state",
+          "expr": "keepalived_vrrp_state {instance=\"vm1:9165\"}",
+          "instant": true,
           "interval": "",
           "legendFormat": "{{job}}@{{instance}}",
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Keepalived status Vm1",
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -378,7 +389,88 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 6,
+        "x": 18,
+        "y": 5
+      },
+      "id": 21,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.8",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "haproxy_server_up {instance=\"vm2:9101\"}",
+          "interval": "",
+          "legendFormat": "{{server}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Vm 2",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "😡"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "🐸"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
         "x": 12,
         "y": 10
       },
@@ -398,7 +490,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "8.1.8",
       "targets": [
         {
           "datasource": {
@@ -406,16 +498,108 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "exemplar": true,
-          "expr": "haproxy_server_up",
+          "expr": "haproxy_server_up {instance=\"vm1:9101\"}",
+          "interval": "",
+          "legendFormat": "{{server}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Vm 1",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "color": "dark-purple",
+                  "index": 0,
+                  "text": "Slave"
+                },
+                "2": {
+                  "color": "dark-orange",
+                  "index": 1,
+                  "text": "Master"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "Not working"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 13
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.8",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "keepalived_vrrp_state {instance=\"vm2:9165\"}",
+          "instant": true,
           "interval": "",
           "legendFormat": "{{job}}@{{instance}}",
           "refId": "A"
         }
       ],
-      "title": "Services",
+      "title": "Keepalived status Vm 2",
       "type": "stat"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -497,6 +681,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -578,10 +763,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "P951FEA4DE68E13C5"
-      },
+      "datasource": "InfluxDB",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -675,8 +857,6 @@
           "measurement": "latency",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"rtt\") FROM \"latency\" WHERE (\"dst\" = 'cloudflare.com') AND $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -700,6 +880,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -782,6 +963,7 @@
       "type": "timeseries"
     },
     {
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -863,8 +1045,8 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "5s",
-  "schemaVersion": 33,
+  "refresh": "1s",
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -878,6 +1060,5 @@
   "timezone": "",
   "title": "Main",
   "uid": "main",
-  "version": 1,
-  "weekStart": ""
+  "version": 3
 }

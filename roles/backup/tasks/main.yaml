@@ -9,7 +9,7 @@
     ssh_key_file: .ssh/id_rsa
 
 - name: create 'restore' directory     
-  file:
+  ansible.builtin.file:
     path: /home/backup/restore
     state: directory
     mode: 0744
@@ -25,4 +25,3 @@
     src: known_hosts
     dest: /home/backup/.ssh/known_hosts
     mode: 0644
-

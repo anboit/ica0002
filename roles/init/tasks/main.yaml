@@ -4,5 +4,6 @@
     cache_valid_time: 86400
 
 - name: Inventory hostname
-  hostname:
+  ansible.builtin.hostname:
     name: "{{ inventory_hostname }}"
+    use: debian

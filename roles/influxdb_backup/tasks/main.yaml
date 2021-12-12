@@ -1,5 +1,6 @@
+---
 - name: Create directory 
-  file:
+  ansible.builtin.file:
     path: /home/backup/influxdb
     state: directory
     mode: "0700"

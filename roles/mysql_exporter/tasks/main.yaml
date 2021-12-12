@@ -1,6 +1,6 @@
 ---
 - name: Move my.cnf.j2 file
-  template:
+  ansible.builtin.template:
     src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
     owner: prometheus
@@ -9,7 +9,7 @@
   notify: Restart mysql_exporter
 
 - name: Move template
-  template:
+  ansible.builtin.template:
     src: prometheus-mysqld-exporter
     dest: /etc/default/prometheus-mysqld-exporter
   notify: Restart mysql_exporter

@@ -1,3 +1,4 @@
+---
 - name: Install uWSGI packages
   ansible.builtin.apt:
     name: 
@@ -15,4 +16,3 @@
     name: uwsgi
     state: started
     enabled: yes
-

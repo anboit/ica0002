@@ -1,3 +1,4 @@
+---
 - name: Create directories
   ansible.builtin.file:
     path: "{{ item }}"
@@ -8,17 +9,18 @@
     - /opt/grafana/provisioning/datasources
 
 - name: copy grafana ini
-  template:
+  ansible.builtin.template:
     src: grafana.ini.j2
     dest: /opt/grafana/grafana.ini
+  no_log: true
 
 - name: copy grafana datasource
-  template:
+  ansible.builtin.template:
     src: sample.yaml
     dest: /opt/grafana/provisioning/datasources/sample.yaml
 
 - name: copy grafana dashboard
-  template:
+  ansible.builtin.template:
     src: main.yaml
     dest: /opt/grafana/provisioning/dashboards/main.yaml
 
@@ -38,4 +40,5 @@
     image: grafana/grafana
     published_ports: "{{ grafana_port }}:3000"
     volumes: /opt/grafana:/etc/grafana
+    restart_policy: always
     

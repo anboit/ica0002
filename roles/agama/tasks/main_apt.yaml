@@ -1,3 +1,4 @@
+---
 - name: System user named agama
   ansible.builtin.user:
     name: agama

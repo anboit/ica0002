@@ -3,3 +3,8 @@
   ansible.builtin.service:
     name: haproxy
     state: restarted
+
+- name: restart haproxy exporter
+  ansible.builtin.service:
+    name: prometheus-haproxy-exporter
+    state: restarted

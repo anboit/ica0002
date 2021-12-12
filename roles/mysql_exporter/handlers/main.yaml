@@ -1,3 +1,4 @@
+---
 - name: Restart mysql_exporter
   ansible.builtin.service:
     name: prometheus-mysqld-exporter

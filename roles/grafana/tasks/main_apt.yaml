@@ -24,34 +24,34 @@
     state: directory
 
 - name: copy main dashboard
-  copy:
+  ansible.builtin.copy:
     src: main.json
     dest: /var/lib/grafana/dashboards/main.json
 
 - name: copy syslog dashboard
-  copy:
+  ansible.builtin.copy:
     src: syslog.json
     dest: /var/lib/grafana/dashboards/syslog.json
 
 - name: copy MySQL dashboard
-  copy:
+  ansible.builtin.copy:
     src: mysql.json
     dest: /var/lib/grafana/dashboards/mysql.json
   
 - name: copy grafana datasource
-  template:
+  ansible.builtin.template:
     src: sample.yaml
     dest: /etc/grafana/provisioning/datasources/sample.yaml
   notify: restart grafana
 
 - name: copy grafana dashboard
-  template:
+  ansible.builtin.template:
     src: main.yaml
     dest: /etc/grafana/provisioning/dashboards/main.yaml
   notify: restart grafana
 
 - name: copy grafana ini
-  template:
+  ansible.builtin.template:
     src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
   notify: restart grafana

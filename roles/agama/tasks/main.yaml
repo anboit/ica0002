@@ -1,3 +1,4 @@
+---
 - name: Create directory
   ansible.builtin.file:
     path: /opt/agama

@@ -1,10 +1,11 @@
+---
 - name: nginx and updating
-  apt:
+  ansible.builtin.apt:
     name: nginx
     state: latest
 
 - name: start nginx
-  service:
+  ansible.builtin.service:
     name: nginx
     state: started
     enabled: yes

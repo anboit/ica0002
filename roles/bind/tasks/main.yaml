@@ -1,19 +1,38 @@
 ---
 - name: bind package
   ansible.builtin.apt:
-    name: bind9 
+    name: 
+      - bind9
+      - python3-dnspython 
 
-- template:
+- name: copy template named.conf.options.j2
+  ansible.builtin.template:
     src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
+  no_log: true
   notify:
     restart bind
 
-- template: 
-    src: db.reily.j2
-    dest: /var/cache/bind/db.reily.j2
+- name: copy template db.reily
+  when: inventory_hostname in groups ['dns_master']
+  ansible.builtin.template: 
+    src: db.reily
+    dest: /var/cache/bind/db.reily
+    force: no
+  notify:
+    rndc reload
 
-- template:
+- name: copy template db.domain.reverse
+  when: inventory_hostname in groups ['dns_master']
+  ansible.builtin.template:
+    src: db.domain.reverse
+    dest: /var/cache/bind/db.reverse
+    force: no
+  notify:
+    rndc reload
+
+- name: copy template named.conf.local.j2
+  ansible.builtin.template:
     src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
   notify:

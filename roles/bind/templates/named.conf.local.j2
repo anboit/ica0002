@@ -1,4 +1,29 @@
 zone "{{domain_name}}" {
-    type primary;
-    file "db.reily.j2";
+{% if inventory_hostname in groups ['dns_master'] %}
+    type master;
+    allow-update {key dns_update_key;};
+    allow-transfer {127.0.0.1; key dns_transfer_key;};
+{% else %}
+    type slave;
+    masters { {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }}; }; 
+{% endif %}
+    file "db.reily";
+};
+
+{% if inventory_hostname not in groups ['dns_master'] %}
+server {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }} {
+    keys { dns_transfer_key;};
+};
+{% endif %}
+
+zone "42.168.192.in-addr.arpa" {
+{% if inventory_hostname in groups ['dns_master'] %}
+    type master;
+    allow-update {key dns_update_key;};
+    allow-transfer {127.0.0.1; key dns_transfer_key;};
+{% else %}
+    type slave;
+    masters { {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }}; }; 
+{% endif %}
+    file "db.reverse";
 };

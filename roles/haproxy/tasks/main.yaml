@@ -23,7 +23,9 @@
   ansible.builtin.template:
     src: haproxy.scrape-uri
     dest: /etc/default/prometheus-haproxy-exporter
-  notify: restart haproxy
+  notify: 
+    - restart haproxy
+    - restart haproxy exporter
 
 - name: Start HAproxy on boot
   ansible.builtin.service:

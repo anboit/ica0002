@@ -13,7 +13,8 @@
     - Daemon reload
     - Restart influxdb exporter
 
-- service:
+- name: Influxdb Exporter
+  ansible.builtin.service:
     name: prometheus-influxdb-stats-exporter
     state: started
     enabled: yes

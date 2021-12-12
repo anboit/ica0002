@@ -1,11 +1,15 @@
 ---
+- name: Install package
+  ansible.builtin.apt:
+    name: iptables-persistent
+
 - name: Fix ssl bug for docker
   ansible.builtin.template:
     src: iptables.mangle
-    dest: /var/local/iptables.mangle
+    dest: /etc/iptables/rules.v4
 
 - name: Restore iptables
   community.general.iptables_state:
-   path: /var/local/iptables.mangle
+   path: /etc/iptables/rules.v4
    state: restored
    table: mangle

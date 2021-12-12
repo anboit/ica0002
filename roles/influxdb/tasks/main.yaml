@@ -14,24 +14,24 @@
       - telegraf
 
 - name: start services
-  service:
+  ansible.builtin.service:
     name: influxdb
     state: started
     enabled: yes
 
 - name: start services
-  service:
+  ansible.builtin.service:
     name: telegraf
     state: started
     enabled: yes
 
 - name: copy telegraf.conf
-  template:
+  ansible.builtin.template:
     src: telegraf.conf
     dest: /etc/telegraf/telegraf.conf
   notify: restart telegraf
 
 - name: copy influxdb.conf
-  template:
+  ansible.builtin.template:
     src: influxdb.conf
     dest: /etc/influxdb/influxdb.conf

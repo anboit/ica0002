@@ -1,5 +1,6 @@
+---
 - name: copy 10-telegraf.conf
-  template:
+  ansible.builtin.template:
     src: 10-telegraf.conf
     dest: /etc/rsyslog.d/10-telegraf.conf
   notify: restart rsyslog

@@ -1,5 +1,6 @@
+---
 - name: Create directory 
-  file:
+  ansible.builtin.file:
     path: /home/backup/mysql
     state: directory
     mode: "0700"
@@ -15,7 +16,7 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Move .my.cnf file
-  template:
+  ansible.builtin.template:
     src: .my.cnf
     dest: /home/backup/.my.cnf
     owner: backup

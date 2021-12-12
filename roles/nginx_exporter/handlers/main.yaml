@@ -1,3 +1,4 @@
+---
 - name: Start prometheus nginx exporters on boot
   ansible.builtin.service:
     name: prometheus-nginx-exporter

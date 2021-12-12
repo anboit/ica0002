@@ -1,3 +1,4 @@
+---
 - name: install and configure MySQL server
   ansible.builtin.apt:
     name: mysql-server
@@ -15,7 +16,7 @@
     state: latest
 
 - name: start mysql-server on boot
-  service:
+  ansible.builtin.service:
     name: mysql
     state: started
     enabled: yes
