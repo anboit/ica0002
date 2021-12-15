@@ -21,6 +21,7 @@
     dest: /home/backup/.my.cnf
     owner: backup
     group: backup
+  no_log: true
 
 - name: Create file mysql-backup
   ansible.builtin.template:

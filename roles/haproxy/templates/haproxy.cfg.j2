@@ -28,7 +28,7 @@ listen my_ha_frontend
     bind *:{{haproxy_port}}
 	stats enable
     stats uri /stats
-	server docker1 vm1:{{agama_port_1}} check
-	server docker2 vm2:{{agama_port_2}} check
-	server docker3 vm1:{{agama_port_1}} check
-	server docker4 vm2:{{agama_port_2}} check
+	{% for vm in groups ['haproxy'] %}
+	server {{ vm }}-first {{ vm }}:{{agama_port_1}} check
+	server {{ vm }}-second {{ vm }}:{{agama_port_2}} check
+	{% endfor %}

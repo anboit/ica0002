@@ -1,0 +1,6422 @@
+Wed Dec 15 09:34:51 EET 2021
++ hostname
+Reis-MacBook-Air.local
++ ansible-playbook infra.yaml --diff
+
+PLAY [Init] ********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm2]
+ok: [vm3]
+ok: [vm1]
+
+TASK [init : Update APT cache] *************************************************
+changed: [vm2]
+changed: [vm1]
+changed: [vm3]
+
+TASK [init : Inventory hostname] ***********************************************
+--- before
++++ after
+@@ -1 +1 @@
+-hostname = anboit-3
++hostname = vm3
+
+changed: [vm3]
+--- before
++++ after
+@@ -1 +1 @@
+-hostname = anboit-1
++hostname = vm1
+
+changed: [vm1]
+--- before
++++ after
+@@ -1 +1 @@
+-hostname = anboit-2
++hostname = vm2
+
+changed: [vm2]
+
+TASK [backup : backup] *********************************************************
+changed: [vm2]
+changed: [vm1]
+changed: [vm3]
+
+TASK [backup : create 'restore' directory] *************************************
+--- before
++++ after
+@@ -1,7 +1,7 @@
+ {
+-    "group": 0,
+-    "mode": "0755",
+-    "owner": 0,
++    "group": 34,
++    "mode": "0744",
++    "owner": 34,
+     "path": "/home/backup/restore",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm2]
+--- before
++++ after
+@@ -1,7 +1,7 @@
+ {
+-    "group": 0,
+-    "mode": "0755",
+-    "owner": 0,
++    "group": 34,
++    "mode": "0744",
++    "owner": 34,
+     "path": "/home/backup/restore",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm1]
+--- before
++++ after
+@@ -1,7 +1,7 @@
+ {
+-    "group": 0,
+-    "mode": "0755",
+-    "owner": 0,
++    "group": 34,
++    "mode": "0744",
++    "owner": 34,
+     "path": "/home/backup/restore",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm3]
+
+TASK [backup : Duplicity] ******************************************************
+The following additional packages will be installed:
+  librsync2 python3-bcrypt python3-fasteners python3-future python3-lockfile
+  python3-monotonic python3-paramiko
+Suggested packages:
+  python3-boto ncftp lftp tahoe-lafs python3-swiftclient python3-pip par2
+  python-future-doc python-lockfile-doc python3-gssapi
+The following NEW packages will be installed:
+  duplicity librsync2 python3-bcrypt python3-fasteners python3-future
+  python3-lockfile python3-monotonic python3-paramiko
+0 upgraded, 8 newly installed, 0 to remove and 140 not upgraded.
+changed: [vm1]
+The following additional packages will be installed:
+  librsync2 python3-bcrypt python3-fasteners python3-future python3-lockfile
+  python3-monotonic python3-paramiko
+Suggested packages:
+  python3-boto ncftp lftp tahoe-lafs python3-swiftclient python3-pip par2
+  python-future-doc python-lockfile-doc python3-gssapi
+The following NEW packages will be installed:
+  duplicity librsync2 python3-bcrypt python3-fasteners python3-future
+  python3-lockfile python3-monotonic python3-paramiko
+0 upgraded, 8 newly installed, 0 to remove and 140 not upgraded.
+changed: [vm2]
+The following additional packages will be installed:
+  librsync2 python3-bcrypt python3-fasteners python3-future python3-lockfile
+  python3-monotonic python3-paramiko
+Suggested packages:
+  python3-boto ncftp lftp tahoe-lafs python3-swiftclient python3-pip par2
+  python-future-doc python-lockfile-doc python3-gssapi
+The following NEW packages will be installed:
+  duplicity librsync2 python3-bcrypt python3-fasteners python3-future
+  python3-lockfile python3-monotonic python3-paramiko
+0 upgraded, 8 newly installed, 0 to remove and 140 not upgraded.
+changed: [vm3]
+
+TASK [backup : Create template known_hosts] ************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpo27x86iw/known_hosts
+@@ -0,0 +1,2 @@
++backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
++backup.reily.tech ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmperblq72v/known_hosts
+@@ -0,0 +1,2 @@
++backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
++backup.reily.tech ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
+
+changed: [vm3]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpg00lgs43/known_hosts
+@@ -0,0 +1,2 @@
++backup ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
++backup.reily.tech ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
+
+changed: [vm2]
+
+TASK [node_exporter : prometheus node exporter] ********************************
+The following additional packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter-collectors smartmontools
+Suggested packages:
+  gsmartcontrol smart-notifier mailx | mailutils
+The following NEW packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter prometheus-node-exporter-collectors
+  smartmontools
+0 upgraded, 8 newly installed, 0 to remove and 140 not upgraded.
+changed: [vm1]
+The following additional packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter-collectors smartmontools
+Suggested packages:
+  gsmartcontrol smart-notifier mailx | mailutils
+The following NEW packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter prometheus-node-exporter-collectors
+  smartmontools
+0 upgraded, 8 newly installed, 0 to remove and 140 not upgraded.
+changed: [vm3]
+The following additional packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter-collectors smartmontools
+Suggested packages:
+  gsmartcontrol smart-notifier mailx | mailutils
+The following NEW packages will be installed:
+  libio-pty-perl libipc-run-perl libtime-duration-perl libtimedate-perl
+  moreutils prometheus-node-exporter prometheus-node-exporter-collectors
+  smartmontools
+0 upgraded, 8 newly installed, 0 to remove and 140 not upgraded.
+changed: [vm2]
+
+TASK [node_exporter : Start prometheus node exporters on boot] *****************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [node_exporter : Pause for 10 seconds] ************************************
+Pausing for 10 seconds
+(ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+ok: [vm1]
+
+TASK [rsyslog : copy 10-telegraf.conf] *****************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpwjek2zqf/10-telegraf.conf
+@@ -0,0 +1,6 @@
++$ActionQueueType LinkedList # use asynchronous processing
++$ActionQueueFileName srvrfwd # set file name, also enables disk mode
++$ActionResumeRetryCount -1 # infinite retries on insert failure
++$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
++
++*.* @vm3:6514;RSYSLOG_SyslogProtocol23Format
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpw15b3hh8/10-telegraf.conf
+@@ -0,0 +1,6 @@
++$ActionQueueType LinkedList # use asynchronous processing
++$ActionQueueFileName srvrfwd # set file name, also enables disk mode
++$ActionResumeRetryCount -1 # infinite retries on insert failure
++$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
++
++*.* @vm3:6514;RSYSLOG_SyslogProtocol23Format
+
+changed: [vm2]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpqpmlhpzw/10-telegraf.conf
+@@ -0,0 +1,6 @@
++$ActionQueueType LinkedList # use asynchronous processing
++$ActionQueueFileName srvrfwd # set file name, also enables disk mode
++$ActionResumeRetryCount -1 # infinite retries on insert failure
++$ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
++
++*.* @vm3:6514;RSYSLOG_SyslogProtocol23Format
+
+changed: [vm3]
+
+RUNNING HANDLER [rsyslog : restart rsyslog] ************************************
+changed: [vm1]
+changed: [vm2]
+changed: [vm3]
+
+PLAY [Collect info about all VMs] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [setup] *******************************************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+PLAY [DNS server] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm2]
+ok: [vm1]
+ok: [vm3]
+
+TASK [bind : bind package] *****************************************************
+The following additional packages will be installed:
+  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
+Suggested packages:
+  bind-doc resolvconf python-ply-doc
+The following NEW packages will be installed:
+  bind9 bind9-utils dns-root-data python3-dnspython python3-ply
+The following packages will be upgraded:
+  bind9-dnsutils bind9-libs
+2 upgraded, 5 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm3]
+The following additional packages will be installed:
+  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
+Suggested packages:
+  bind-doc resolvconf python-ply-doc
+The following NEW packages will be installed:
+  bind9 bind9-utils dns-root-data python3-dnspython python3-ply
+The following packages will be upgraded:
+  bind9-dnsutils bind9-libs
+2 upgraded, 5 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+The following additional packages will be installed:
+  bind9-dnsutils bind9-libs bind9-utils dns-root-data python3-ply
+Suggested packages:
+  bind-doc resolvconf python-ply-doc
+The following NEW packages will be installed:
+  bind9 bind9-utils dns-root-data python3-dnspython python3-ply
+The following packages will be upgraded:
+  bind9-dnsutils bind9-libs
+2 upgraded, 5 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+
+TASK [bind : copy template named.conf.options.j2] ******************************
+changed: [vm1]
+changed: [vm3]
+changed: [vm2]
+
+TASK [bind : copy template db.reily] *******************************************
+skipping: [vm1]
+skipping: [vm2]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp02v3k6rs/db.reily
+@@ -0,0 +1,14 @@
++$TTL    604800
++reily.tech.    IN    SOA    vm2.reily.tech. rei.reily.tech. (
++                  2        ; Serial
++             604800        ; Refresh
++              86400        ; Retry
++            2419200        ; Expire
++             604800 )    ; Negative Cache TTL
++;
++reily.tech.    IN    NS    vm3
++reily.tech.    IN    NS    vm1
++reily.tech.    IN    NS    vm2
++vm1    IN    A    192.168.42.67
++vm2    IN    A    192.168.42.44
++vm3    IN    A    192.168.42.147
+
+changed: [vm3]
+
+TASK [bind : copy template db.domain.reverse] **********************************
+skipping: [vm1]
+skipping: [vm2]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp1xnanjdq/db.domain.reverse
+@@ -0,0 +1,14 @@
++$TTL    604800
++42.168.192.in-addr.arpa.    IN    SOA    vm2.reily.tech. rei.reily.tech. (
++                  2        ; Serial
++             604800        ; Refresh
++              86400        ; Retry
++            2419200        ; Expire
++             604800 )    ; Negative Cache TTL
++;
++42.168.192.in-addr.arpa.    IN    NS    vm3.reily.tech.
++42.168.192.in-addr.arpa.    IN    NS    vm1.reily.tech.
++42.168.192.in-addr.arpa.    IN    NS    vm2.reily.tech.
++67    IN    PTR    vm1.reily.tech.
++44    IN    PTR    vm2.reily.tech.
++147    IN    PTR    vm3.reily.tech.
+
+changed: [vm3]
+
+TASK [bind : copy template named.conf.local.j2] ********************************
+--- before: /etc/bind/named.conf.local
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp_a0x6ivt/named.conf.local.j2
+@@ -1,8 +1,15 @@
+-//
+-// Do any local configuration here
+-//
++zone "reily.tech" {
++    type slave;
++    masters { 192.168.42.147; }; 
++    file "db.reily";
++};
+ 
+-// Consider adding the 1918 zones here, if they are not used in your
+-// organization
+-//include "/etc/bind/zones.rfc1918";
++server 192.168.42.147 {
++    keys { dns_transfer_key;};
++};
+ 
++zone "42.168.192.in-addr.arpa" {
++    type slave;
++    masters { 192.168.42.147; }; 
++    file "db.reverse";
++};
+
+changed: [vm1]
+--- before: /etc/bind/named.conf.local
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp8wmwyozb/named.conf.local.j2
+@@ -1,8 +1,14 @@
+-//
+-// Do any local configuration here
+-//
++zone "reily.tech" {
++    type master;
++    allow-update {key dns_update_key;};
++    allow-transfer {127.0.0.1; key dns_transfer_key;};
++    file "db.reily";
++};
+ 
+-// Consider adding the 1918 zones here, if they are not used in your
+-// organization
+-//include "/etc/bind/zones.rfc1918";
+ 
++zone "42.168.192.in-addr.arpa" {
++    type master;
++    allow-update {key dns_update_key;};
++    allow-transfer {127.0.0.1; key dns_transfer_key;};
++    file "db.reverse";
++};
+
+changed: [vm3]
+--- before: /etc/bind/named.conf.local
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpaohbi_j_/named.conf.local.j2
+@@ -1,8 +1,15 @@
+-//
+-// Do any local configuration here
+-//
++zone "reily.tech" {
++    type slave;
++    masters { 192.168.42.147; }; 
++    file "db.reily";
++};
+ 
+-// Consider adding the 1918 zones here, if they are not used in your
+-// organization
+-//include "/etc/bind/zones.rfc1918";
++server 192.168.42.147 {
++    keys { dns_transfer_key;};
++};
+ 
++zone "42.168.192.in-addr.arpa" {
++    type slave;
++    masters { 192.168.42.147; }; 
++    file "db.reverse";
++};
+
+changed: [vm2]
+
+TASK [bind_exporter : prometheus bind exporter] ********************************
+The following NEW packages will be installed:
+  prometheus-bind-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+The following NEW packages will be installed:
+  prometheus-bind-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm3]
+The following NEW packages will be installed:
+  prometheus-bind-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+
+TASK [bind_exporter : Start prometheus bind exporters on boot] *****************
+ok: [vm2]
+ok: [vm3]
+ok: [vm1]
+
+RUNNING HANDLER [bind : restart bind] ******************************************
+changed: [vm3]
+changed: [vm1]
+changed: [vm2]
+
+RUNNING HANDLER [bind : rndc reload] *******************************************
+changed: [vm3]
+
+PLAY [DNS records] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm3]
+
+TASK [dns_records : Set A records] *********************************************
+changed: [vm3] => (item={'key': 'backup', 'value': '192.168.42.156'})
+
+TASK [dns_records : Set CNAME records] *****************************************
+changed: [vm3] => (item={'key': 'grafana', 'value': 'vm3'})
+changed: [vm3] => (item={'key': 'influxdb', 'value': 'vm3'})
+changed: [vm3] => (item={'key': 'lb1', 'value': 'vm1'})
+changed: [vm3] => (item={'key': 'lb2', 'value': 'vm2'})
+changed: [vm3] => (item={'key': 'mysql1', 'value': 'vm1'})
+changed: [vm3] => (item={'key': 'mysql2', 'value': 'vm2'})
+changed: [vm3] => (item={'key': 'ns1', 'value': 'vm3'})
+changed: [vm3] => (item={'key': 'prometheus', 'value': 'vm3'})
+changed: [vm3] => (item={'key': 'web1', 'value': 'vm1'})
+changed: [vm3] => (item={'key': 'web2', 'value': 'vm2'})
+
+PLAY [change nameserver on vms] ************************************************
+
+TASK [dns_resolv : Stop systemd-resolved] **************************************
+changed: [vm1]
+changed: [vm2]
+changed: [vm3]
+
+TASK [dns_resolv : Change resolv.conf] *****************************************
+--- before: /etc/resolv.conf
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpjfwsycag/resolv.conf
+@@ -1,19 +1,4 @@
+-# This file is managed by man:systemd-resolved(8). Do not edit.
+-#
+-# This is a dynamic resolv.conf file for connecting local clients to the
+-# internal DNS stub resolver of systemd-resolved. This file lists all
+-# configured search domains.
+-#
+-# Run "resolvectl status" to see details about the uplink DNS servers
+-# currently in use.
+-#
+-# Third party programs must not access this file directly, but only through the
+-# symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,
+-# replace this symlink by a static file or a different symlink.
+-#
+-# See man:systemd-resolved.service(8) for details about the supported modes of
+-# operation for /etc/resolv.conf.
++nameserver 192.168.42.67
++nameserver 192.168.42.44
+ 
+-nameserver 127.0.0.53
+-options edns0 trust-ad
+-search openstacklocal
++search reily.tech
+
+changed: [vm1]
+--- before: /etc/resolv.conf
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpm8fl8gp6/resolv.conf
+@@ -1,19 +1,4 @@
+-# This file is managed by man:systemd-resolved(8). Do not edit.
+-#
+-# This is a dynamic resolv.conf file for connecting local clients to the
+-# internal DNS stub resolver of systemd-resolved. This file lists all
+-# configured search domains.
+-#
+-# Run "resolvectl status" to see details about the uplink DNS servers
+-# currently in use.
+-#
+-# Third party programs must not access this file directly, but only through the
+-# symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,
+-# replace this symlink by a static file or a different symlink.
+-#
+-# See man:systemd-resolved.service(8) for details about the supported modes of
+-# operation for /etc/resolv.conf.
++nameserver 192.168.42.67
++nameserver 192.168.42.44
+ 
+-nameserver 127.0.0.53
+-options edns0 trust-ad
+-search openstacklocal
++search reily.tech
+
+changed: [vm3]
+--- before: /etc/resolv.conf
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpxxqziyfz/resolv.conf
+@@ -1,19 +1,4 @@
+-# This file is managed by man:systemd-resolved(8). Do not edit.
+-#
+-# This is a dynamic resolv.conf file for connecting local clients to the
+-# internal DNS stub resolver of systemd-resolved. This file lists all
+-# configured search domains.
+-#
+-# Run "resolvectl status" to see details about the uplink DNS servers
+-# currently in use.
+-#
+-# Third party programs must not access this file directly, but only through the
+-# symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,
+-# replace this symlink by a static file or a different symlink.
+-#
+-# See man:systemd-resolved.service(8) for details about the supported modes of
+-# operation for /etc/resolv.conf.
++nameserver 192.168.42.67
++nameserver 192.168.42.44
+ 
+-nameserver 127.0.0.53
+-options edns0 trust-ad
+-search openstacklocal
++search reily.tech
+
+changed: [vm2]
+
+PLAY [Database server] *********************************************************
+
+TASK [mysql : install and configure MySQL server] ******************************
+The following additional packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libencode-locale-perl libevent-core-2.1-7
+  libevent-pthreads-2.1-7 libfcgi-perl libhtml-parser-perl libhtml-tagset-perl
+  libhtml-template-perl libhttp-date-perl libhttp-message-perl libio-html-perl
+  liblwp-mediatypes-perl libmecab2 liburi-perl mecab-ipadic mecab-ipadic-utf8
+  mecab-utils mysql-client-8.0 mysql-client-core-8.0 mysql-common
+  mysql-server-8.0 mysql-server-core-8.0
+Suggested packages:
+  libdata-dump-perl libipc-sharedcache-perl libwww-perl mailx tinyca
+The following NEW packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libencode-locale-perl libevent-core-2.1-7
+  libevent-pthreads-2.1-7 libfcgi-perl libhtml-parser-perl libhtml-tagset-perl
+  libhtml-template-perl libhttp-date-perl libhttp-message-perl libio-html-perl
+  liblwp-mediatypes-perl libmecab2 liburi-perl mecab-ipadic mecab-ipadic-utf8
+  mecab-utils mysql-client-8.0 mysql-client-core-8.0 mysql-common mysql-server
+  mysql-server-8.0 mysql-server-core-8.0
+0 upgraded, 24 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+The following additional packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libencode-locale-perl libevent-core-2.1-7
+  libevent-pthreads-2.1-7 libfcgi-perl libhtml-parser-perl libhtml-tagset-perl
+  libhtml-template-perl libhttp-date-perl libhttp-message-perl libio-html-perl
+  liblwp-mediatypes-perl libmecab2 liburi-perl mecab-ipadic mecab-ipadic-utf8
+  mecab-utils mysql-client-8.0 mysql-client-core-8.0 mysql-common
+  mysql-server-8.0 mysql-server-core-8.0
+Suggested packages:
+  libdata-dump-perl libipc-sharedcache-perl libwww-perl mailx tinyca
+The following NEW packages will be installed:
+  libcgi-fast-perl libcgi-pm-perl libencode-locale-perl libevent-core-2.1-7
+  libevent-pthreads-2.1-7 libfcgi-perl libhtml-parser-perl libhtml-tagset-perl
+  libhtml-template-perl libhttp-date-perl libhttp-message-perl libio-html-perl
+  liblwp-mediatypes-perl libmecab2 liburi-perl mecab-ipadic mecab-ipadic-utf8
+  mecab-utils mysql-client-8.0 mysql-client-core-8.0 mysql-common mysql-server
+  mysql-server-8.0 mysql-server-core-8.0
+0 upgraded, 24 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+
+TASK [mysql : override mysql configuration] ************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpneo3uuv8/override.cnf
+@@ -0,0 +1,7 @@
++[mysqld]
++bind-address = 0.0.0.0
++
++log-bin = /var/log/mysql/mysql-bin.log
++relay-log = /var/log/mysql/mysql-relay.log
++replicate-do-db = agama
++server-id = 44
+
+changed: [vm2]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpt7ysf69w/override.cnf
+@@ -0,0 +1,7 @@
++[mysqld]
++bind-address = 0.0.0.0
++
++log-bin = /var/log/mysql/mysql-bin.log
++relay-log = /var/log/mysql/mysql-relay.log
++replicate-do-db = agama
++server-id = 67
+
+changed: [vm1]
+
+TASK [mysql : install python3-pymysql] *****************************************
+Suggested packages:
+  python-pymysql-doc
+The following NEW packages will be installed:
+  python3-pymysql
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+Suggested packages:
+  python-pymysql-doc
+The following NEW packages will be installed:
+  python3-pymysql
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+
+TASK [mysql : start mysql-server on boot] **************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : MySQL database] **************************************************
+changed: [vm2]
+changed: [vm1]
+
+TASK [mysql : MySQL user] ******************************************************
+changed: [vm1]
+changed: [vm2]
+
+TASK [mysql : Create user exporter] ********************************************
+changed: [vm1]
+changed: [vm2]
+
+TASK [mysql : Create MySQL user for replication] *******************************
+changed: [vm2]
+changed: [vm1]
+
+TASK [mysql : readonly] ********************************************************
+changed: [vm2]
+changed: [vm1]
+
+TASK [mysql_exporter : Move my.cnf.j2 file] ************************************
+changed: [vm1]
+changed: [vm2]
+
+TASK [mysql_exporter : Move template] ******************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp_e_0byky/prometheus-mysqld-exporter
+@@ -0,0 +1 @@
++ARGS="--collect.slave_status"
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpud5c2x5h/prometheus-mysqld-exporter
+@@ -0,0 +1 @@
++ARGS="--collect.slave_status"
+
+changed: [vm2]
+
+TASK [mysql_exporter : prometheus mysql exporter] ******************************
+The following additional packages will be installed:
+  daemon
+The following NEW packages will be installed:
+  daemon prometheus-mysqld-exporter
+0 upgraded, 2 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+The following additional packages will be installed:
+  daemon
+The following NEW packages will be installed:
+  daemon prometheus-mysqld-exporter
+0 upgraded, 2 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+
+TASK [mysql_exporter : Start prometheus mysql exporters on boot] ***************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Create directory] *****************************************
+--- before
++++ after
+@@ -1,7 +1,7 @@
+ {
+-    "group": 0,
+-    "mode": "0755",
+-    "owner": 0,
++    "group": 34,
++    "mode": "0700",
++    "owner": 34,
+     "path": "/home/backup/mysql",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm1]
+--- before
++++ after
+@@ -1,7 +1,7 @@
+ {
+-    "group": 0,
+-    "mode": "0755",
+-    "owner": 0,
++    "group": 34,
++    "mode": "0700",
++    "owner": 34,
+     "path": "/home/backup/mysql",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm2]
+
+TASK [mysql_backup : Create user backup] ***************************************
+changed: [vm2]
+changed: [vm1]
+
+TASK [mysql_backup : Move .my.cnf file] ****************************************
+changed: [vm1]
+changed: [vm2]
+
+TASK [mysql_backup : Create file mysql-backup] *********************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp9voixm8k/mysql-backup.j2
+@@ -0,0 +1,3 @@
++0 1 * * 0-6  backup  mysqldump agama > /home/backup/mysql/agama.sql
++30 1 * * 0  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://anboit@backup.reily.tech//home/anboit/
++30 1 * * 1-6  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://anboit@backup.reily.tech//home/anboit/
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpnk8qref4/mysql-backup.j2
+@@ -0,0 +1 @@
++
+
+changed: [vm2]
+
+RUNNING HANDLER [mysql : Restart mysql] ****************************************
+changed: [vm2]
+changed: [vm1]
+
+RUNNING HANDLER [mysql : Reset MySQL source] ***********************************
+skipping: [vm1] => (item=stopreplica) 
+skipping: [vm1] => (item=resetprimary) 
+ok: [vm2] => (item=stopreplica)
+changed: [vm2] => (item=resetprimary)
+
+RUNNING HANDLER [mysql : Reset MySQL replica] **********************************
+skipping: [vm2] => (item=stopreplica) 
+skipping: [vm2] => (item=changeprimary) 
+skipping: [vm2] => (item=resetreplica) 
+skipping: [vm2] => (item=startreplica) 
+ok: [vm1] => (item=stopreplica)
+changed: [vm1] => (item=changeprimary)
+changed: [vm1] => (item=resetreplica)
+changed: [vm1] => (item=startreplica)
+
+RUNNING HANDLER [mysql_exporter : Restart mysql_exporter] **********************
+changed: [vm1]
+changed: [vm2]
+
+PLAY [Web server] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [ssl : Install package] ***************************************************
+The following additional packages will be installed:
+  netfilter-persistent
+The following NEW packages will be installed:
+  iptables-persistent netfilter-persistent
+0 upgraded, 2 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+The following additional packages will be installed:
+  netfilter-persistent
+The following NEW packages will be installed:
+  iptables-persistent netfilter-persistent
+0 upgraded, 2 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+
+TASK [ssl : Fix ssl bug for docker] ********************************************
+--- before: /etc/iptables/rules.v4
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpo2w4r460/iptables.mangle
+@@ -1,7 +1,8 @@
+-# Generated by iptables-save v1.8.4 on Wed Dec 15 07:43:10 2021
+-*filter
+-:INPUT ACCEPT [0:0]
+-:FORWARD ACCEPT [0:0]
+-:OUTPUT ACCEPT [0:0]
++*mangle
++:PREROUTING ACCEPT [12663:18902706]
++:INPUT ACCEPT [11246:18725705]
++:FORWARD ACCEPT [1417:177001]
++:OUTPUT ACCEPT [10486:6340768]
++:POSTROUTING ACCEPT [11903:6517769]
++-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+ COMMIT
+-# Completed on Wed Dec 15 07:43:10 2021
+
+changed: [vm1]
+--- before: /etc/iptables/rules.v4
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpd2l1yjut/iptables.mangle
+@@ -1,7 +1,8 @@
+-# Generated by iptables-save v1.8.4 on Wed Dec 15 07:43:10 2021
+-*filter
+-:INPUT ACCEPT [0:0]
+-:FORWARD ACCEPT [0:0]
+-:OUTPUT ACCEPT [0:0]
++*mangle
++:PREROUTING ACCEPT [12663:18902706]
++:INPUT ACCEPT [11246:18725705]
++:FORWARD ACCEPT [1417:177001]
++:OUTPUT ACCEPT [10486:6340768]
++:POSTROUTING ACCEPT [11903:6517769]
++-A POSTROUTING -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+ COMMIT
+-# Completed on Wed Dec 15 07:43:10 2021
+
+changed: [vm2]
+
+TASK [ssl : Restore iptables] **************************************************
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+changed: [vm1]
+changed: [vm2]
+
+TASK [docker : Docker package] *************************************************
+The following additional packages will be installed:
+  bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
+  ubuntu-fan
+Suggested packages:
+  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-doc
+  rinse zfs-fuse | zfsutils
+The following NEW packages will be installed:
+  bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
+  python3-websocket runc ubuntu-fan
+0 upgraded, 10 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+The following additional packages will be installed:
+  bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
+  ubuntu-fan
+Suggested packages:
+  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-doc
+  rinse zfs-fuse | zfsutils
+The following NEW packages will be installed:
+  bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
+  python3-websocket runc ubuntu-fan
+0 upgraded, 10 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [docker : Log into DockerHub] *********************************************
+changed: [vm2]
+changed: [vm1]
+
+TASK [agama : Create directory] ************************************************
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/agama",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm1]
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/agama",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm2]
+
+TASK [agama : Install AGAMA] ***************************************************
+changed: [vm2]
+changed: [vm1]
+
+TASK [agama : Agama docker image] **********************************************
+changed: [vm1]
+changed: [vm2]
+
+TASK [agama : Agama Docker Container] ******************************************
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "exists": false,
+-    "running": false
++    "exists": true,
++    "running": true
+ }
+
+changed: [vm2]
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "exists": false,
+-    "running": false
++    "exists": true,
++    "running": true
+ }
+
+changed: [vm1]
+
+TASK [agama : Agama Docker Container] ******************************************
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "exists": false,
+-    "running": false
++    "exists": true,
++    "running": true
+ }
+
+changed: [vm2]
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "exists": false,
+-    "running": false
++    "exists": true,
++    "running": true
+ }
+
+changed: [vm1]
+
+PLAY [HAproxy] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Install HAproxy and Keepalived] ********************************
+The following additional packages will be installed:
+  liblua5.3-0
+Suggested packages:
+  vim-haproxy haproxy-doc
+The following NEW packages will be installed:
+  haproxy liblua5.3-0
+0 upgraded, 2 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+The following additional packages will be installed:
+  liblua5.3-0
+Suggested packages:
+  vim-haproxy haproxy-doc
+The following NEW packages will be installed:
+  haproxy liblua5.3-0
+0 upgraded, 2 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+
+TASK [haproxy : Copy HAproxy conf file] ****************************************
+--- before: /etc/haproxy/haproxy.cfg
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp3k_6b45_/haproxy.cfg.j2
+@@ -7,15 +7,6 @@
+ 	user haproxy
+ 	group haproxy
+ 	daemon
+-
+-	# Default SSL material locations
+-	ca-base /etc/ssl/certs
+-	crt-base /etc/ssl/private
+-
+-	# See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+-        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+-        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+-        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+ 
+ defaults
+ 	log	global
+@@ -32,3 +23,13 @@
+ 	errorfile 502 /etc/haproxy/errors/502.http
+ 	errorfile 503 /etc/haproxy/errors/503.http
+ 	errorfile 504 /etc/haproxy/errors/504.http
++
++listen my_ha_frontend
++    bind *:88
++	stats enable
++    stats uri /stats
++		server vm1-first vm1:8001 check
++	server vm1-second vm1:8002 check
++		server vm2-first vm2:8001 check
++	server vm2-second vm2:8002 check
++	
+
+changed: [vm1]
+--- before: /etc/haproxy/haproxy.cfg
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmppt7wxbfo/haproxy.cfg.j2
+@@ -7,15 +7,6 @@
+ 	user haproxy
+ 	group haproxy
+ 	daemon
+-
+-	# Default SSL material locations
+-	ca-base /etc/ssl/certs
+-	crt-base /etc/ssl/private
+-
+-	# See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+-        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+-        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+-        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+ 
+ defaults
+ 	log	global
+@@ -32,3 +23,13 @@
+ 	errorfile 502 /etc/haproxy/errors/502.http
+ 	errorfile 503 /etc/haproxy/errors/503.http
+ 	errorfile 504 /etc/haproxy/errors/504.http
++
++listen my_ha_frontend
++    bind *:88
++	stats enable
++    stats uri /stats
++		server vm1-first vm1:8001 check
++	server vm1-second vm1:8002 check
++		server vm2-first vm2:8001 check
++	server vm2-second vm2:8002 check
++	
+
+changed: [vm2]
+
+TASK [haproxy : Copy ha88 file] ************************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpv_jkaioi/ha88.j2
+@@ -0,0 +1,3 @@
++#! /bin/bash
++
++ss -ntl | grep -q ':88 '
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpmayx056g/ha88.j2
+@@ -0,0 +1,3 @@
++#! /bin/bash
++
++ss -ntl | grep -q ':88 '
+
+changed: [vm2]
+
+TASK [haproxy : HAproxy exporter] **********************************************
+The following NEW packages will be installed:
+  prometheus-haproxy-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+The following NEW packages will be installed:
+  prometheus-haproxy-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+
+TASK [haproxy : Copy HAproxy.scrape-uri] ***************************************
+--- before: /etc/default/prometheus-haproxy-exporter
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp_s43_3q4/haproxy.scrape-uri
+@@ -1,35 +1 @@
+-# Set the command-line arguments to pass to the server.
+-# Due to shell scaping, to pass backslashes for regexes, you need to double
+-# them (\\d for \d). If running under systemd, you need to double them again
+-# (\\\\d to mean \d), and escape newlines too.
+-ARGS=""
+-
+-# Prometheus-haproxy-exporter supports the following options:
+-#
+-#  --web.listen-address=":9101"
+-#    Address to listen on for web interface and telemetry.
+-#  --web.telemetry-path="/metrics"
+-#    Path under which to expose metrics.
+-#  --haproxy.scrape-uri="http://localhost/;csv"
+-#    URI on which to scrape HAProxy.
+-#  --haproxy.ssl-verify
+-#    Flag that enables SSL certificate verification for the scrape URI
+-#  --haproxy.server-metric-fields="2,3,4,5,6,7,8,9,13,14,15,16,17,18,21,24,33,35,38,39,40,41,42,43,44"
+-#    Comma-separated list of exported server metrics. See
+-#    http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#9.1
+-#  --haproxy.timeout=5s
+-#    Timeout for trying to get stats from HAProxy.
+-#  --haproxy.pid-file=""
+-#    Path to HAProxy pid file.
+-#
+-#    If provided, the standard process metrics get exported for the HAProxy
+-#    process, prefixed with 'haproxy_process_...'. The haproxy_process exporter
+-#    needs to have read access to files owned by the HAProxy process. Depends
+-#    on the availability of /proc.
+-#    https://prometheus.io/docs/instrumenting/writing_clientlibs/#process-metrics.
+-#  --log.level="info"
+-#    Only log messages with the given severity or above.
+-#    Valid levels: [debug, info, warn, error, fatal]
+-#  --log.format="logger:stderr"
+-#    Set the log target and format. Example:
+-#    "logger:syslog?appname=bob&local=7" or "logger:stdout?json=true"
++ARGS='--haproxy.scrape-uri="http://vm1.reily.tech:88/stats;csv"'
+
+changed: [vm1]
+--- before: /etc/default/prometheus-haproxy-exporter
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmplq3do5_e/haproxy.scrape-uri
+@@ -1,35 +1 @@
+-# Set the command-line arguments to pass to the server.
+-# Due to shell scaping, to pass backslashes for regexes, you need to double
+-# them (\\d for \d). If running under systemd, you need to double them again
+-# (\\\\d to mean \d), and escape newlines too.
+-ARGS=""
+-
+-# Prometheus-haproxy-exporter supports the following options:
+-#
+-#  --web.listen-address=":9101"
+-#    Address to listen on for web interface and telemetry.
+-#  --web.telemetry-path="/metrics"
+-#    Path under which to expose metrics.
+-#  --haproxy.scrape-uri="http://localhost/;csv"
+-#    URI on which to scrape HAProxy.
+-#  --haproxy.ssl-verify
+-#    Flag that enables SSL certificate verification for the scrape URI
+-#  --haproxy.server-metric-fields="2,3,4,5,6,7,8,9,13,14,15,16,17,18,21,24,33,35,38,39,40,41,42,43,44"
+-#    Comma-separated list of exported server metrics. See
+-#    http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#9.1
+-#  --haproxy.timeout=5s
+-#    Timeout for trying to get stats from HAProxy.
+-#  --haproxy.pid-file=""
+-#    Path to HAProxy pid file.
+-#
+-#    If provided, the standard process metrics get exported for the HAProxy
+-#    process, prefixed with 'haproxy_process_...'. The haproxy_process exporter
+-#    needs to have read access to files owned by the HAProxy process. Depends
+-#    on the availability of /proc.
+-#    https://prometheus.io/docs/instrumenting/writing_clientlibs/#process-metrics.
+-#  --log.level="info"
+-#    Only log messages with the given severity or above.
+-#    Valid levels: [debug, info, warn, error, fatal]
+-#  --log.format="logger:stderr"
+-#    Set the log target and format. Example:
+-#    "logger:syslog?appname=bob&local=7" or "logger:stdout?json=true"
++ARGS='--haproxy.scrape-uri="http://vm2.reily.tech:88/stats;csv"'
+
+changed: [vm2]
+
+TASK [haproxy : Start HAproxy on boot] *****************************************
+ok: [vm1] => (item=haproxy)
+ok: [vm2] => (item=haproxy)
+ok: [vm1] => (item=prometheus-haproxy-exporter)
+ok: [vm2] => (item=prometheus-haproxy-exporter)
+
+TASK [keepalived : Install HAproxy and Keepalived] *****************************
+The following additional packages will be installed:
+  ipvsadm libmysqlclient21 libnl-3-200 libnl-genl-3-200 libsensors-config
+  libsensors5 libsnmp-base libsnmp35
+Suggested packages:
+  heartbeat ldirectord lm-sensors snmp-mibs-downloader
+The following NEW packages will be installed:
+  ipvsadm keepalived libmysqlclient21 libnl-3-200 libnl-genl-3-200
+  libsensors-config libsensors5 libsnmp-base libsnmp35
+0 upgraded, 9 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+The following additional packages will be installed:
+  ipvsadm libmysqlclient21 libnl-3-200 libnl-genl-3-200 libsensors-config
+  libsensors5 libsnmp-base libsnmp35
+Suggested packages:
+  heartbeat ldirectord lm-sensors snmp-mibs-downloader
+The following NEW packages will be installed:
+  ipvsadm keepalived libmysqlclient21 libnl-3-200 libnl-genl-3-200
+  libsensors-config libsensors5 libsnmp-base libsnmp35
+0 upgraded, 9 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+
+TASK [keepalived : Copy Keepalived conf file] **********************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpnfxmq4dv/keepalived.conf.j2
+@@ -0,0 +1,21 @@
++vrrp_script check_haproxy {                 
++    script "/usr/local/bin/ha88" 
++    weight 20                              
++    interval 1               
++}
++
++vrrp_instance my_ha_frontend {
++    interface ens3
++    virtual_router_id 51
++        priority 100
++        advert_int 1
++    virtual_ipaddress {
++          192.168.100.67/24
++    }
++    unicast_peer {
++                              192.168.42.44 
++                }
++    track_script {
++      check_haproxy
++    }
++}
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpmgu425sn/keepalived.conf.j2
+@@ -0,0 +1,21 @@
++vrrp_script check_haproxy {                 
++    script "/usr/local/bin/ha88" 
++    weight 20                              
++    interval 1               
++}
++
++vrrp_instance my_ha_frontend {
++    interface ens3
++    virtual_router_id 51
++        priority 99
++        advert_int 1
++    virtual_ipaddress {
++          192.168.100.67/24
++    }
++    unicast_peer {
++                  192.168.42.67 
++                            }
++    track_script {
++      check_haproxy
++    }
++}
+
+changed: [vm2]
+
+TASK [keepalived : Extract exporter into folder] *******************************
+changed: [vm1]
+changed: [vm2]
+
+TASK [keepalived : keepalived exporter service] ********************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpi2yucfoj/keepalived_exporter.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Keepalived Exporter
++Documentation="https://github.com/cafebazaar/keepalived-exporter"
++After=network-online.target
++
++[Service]
++User=root
++ExecStart=/usr/local/bin/keepalived-exporter-1.2.0.linux-amd64/keepalived-exporter $ARGS
++
++[Install]
++WantedBy=multi-user.target
+
+changed: [vm2]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpe_ozgiv7/keepalived_exporter.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Keepalived Exporter
++Documentation="https://github.com/cafebazaar/keepalived-exporter"
++After=network-online.target
++
++[Service]
++User=root
++ExecStart=/usr/local/bin/keepalived-exporter-1.2.0.linux-amd64/keepalived-exporter $ARGS
++
++[Install]
++WantedBy=multi-user.target
+
+changed: [vm1]
+
+TASK [keepalived : Start keepalived on boot] ***********************************
+changed: [vm1] => (item=keepalived)
+changed: [vm2] => (item=keepalived)
+changed: [vm1] => (item=keepalived_exporter)
+changed: [vm2] => (item=keepalived_exporter)
+
+RUNNING HANDLER [haproxy : restart haproxy] ************************************
+changed: [vm1]
+changed: [vm2]
+
+RUNNING HANDLER [haproxy : restart haproxy exporter] ***************************
+changed: [vm1]
+changed: [vm2]
+
+RUNNING HANDLER [keepalived : Daemon_reload] ***********************************
+ok: [vm1]
+ok: [vm2]
+
+RUNNING HANDLER [keepalived : restart keepalived] ******************************
+changed: [vm1]
+changed: [vm2]
+
+PLAY [Prometheus] **************************************************************
+
+TASK [prometheus : prometheus] *************************************************
+The following additional packages will be installed:
+  fonts-glyphicons-halflings javascript-common libc-ares2 libjs-bootstrap
+  libjs-bootstrap4 libjs-d3 libjs-eonasdan-bootstrap-datetimepicker
+  libjs-jquery libjs-jquery-hotkeys libjs-moment libjs-moment-timezone
+  libjs-mustache libjs-popper.js libjs-rickshaw libnode64 node-jquery nodejs
+  nodejs-doc
+Suggested packages:
+  apache2 | lighttpd | httpd npm
+The following NEW packages will be installed:
+  fonts-glyphicons-halflings javascript-common libc-ares2 libjs-bootstrap
+  libjs-bootstrap4 libjs-d3 libjs-eonasdan-bootstrap-datetimepicker
+  libjs-jquery libjs-jquery-hotkeys libjs-moment libjs-moment-timezone
+  libjs-mustache libjs-popper.js libjs-rickshaw libnode64 node-jquery nodejs
+  nodejs-doc prometheus
+0 upgraded, 19 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm3]
+
+TASK [prometheus : Start prometheus on boot] ***********************************
+ok: [vm3]
+
+TASK [prometheus : Change /etc/default/prometheus] *****************************
+--- before: /etc/default/prometheus
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpcakz65k8/prometheus
+@@ -1,5 +1,5 @@
+ # Set the command-line arguments to pass to the server.
+-ARGS=""
++ARGS="--web.external-url http://193.40.156.86:14780/prometheus/"
+ 
+ # Prometheus supports the following options:
+ #  --config.file="/etc/prometheus/prometheus.yml"
+
+changed: [vm3]
+
+TASK [prometheus : Change /etc/prometheus/prometheus.yml] **********************
+--- before: /etc/prometheus/prometheus.yml
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmppn4idv41/prometheus.yml
+@@ -1,44 +1,57 @@
+-# Sample config for Prometheus.
+-
+ global:
+-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+-  # scrape_timeout is set to the global default (10s).
+-
+-  # Attach these labels to any time series or alerts when communicating with
+-  # external systems (federation, remote storage, Alertmanager).
+-  external_labels:
+-      monitor: 'example'
+-
+-# Alertmanager configuration
+-alerting:
+-  alertmanagers:
+-  - static_configs:
+-    - targets: ['localhost:9093']
+-
+-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+-rule_files:
+-  # - "first_rules.yml"
+-  # - "second_rules.yml"
+-
+-# A scrape configuration containing exactly one endpoint to scrape:
+-# Here it's Prometheus itself.
++  scrape_interval:     15s
++  evaluation_interval: 15s 
++  
+ scrape_configs:
+-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+   - job_name: 'prometheus'
+-
+-    # Override the global default and scrape targets from this job every 5 seconds.
+     scrape_interval: 5s
+     scrape_timeout: 5s
+-
+-    # metrics_path defaults to '/metrics'
+-    # scheme defaults to 'http'.
+-
++    metrics_path: /prometheus/metrics
+     static_configs:
+       - targets: ['localhost:9090']
++ 
++  - job_name: linux
++    static_configs:
++      - targets:
++        - vm1:9100
++        - vm2:9100
++        - vm3:9100
+ 
+-  - job_name: node
+-    # If prometheus-node-exporter is installed, grab stats about the local
+-    # machine by default.
++  - job_name: bind9
+     static_configs:
+-      - targets: ['localhost:9100']
++      - targets:
++        - vm3:9119
++        - vm1:9119
++        - vm2:9119
++
++  - job_name: mysql
++    static_configs:
++      - targets:
++        - vm1:9104
++        - vm2:9104
++
++  - job_name: nginx
++    static_configs:
++      - targets:
++        - vm1:9113
++        - vm2:9113
++        - vm3:9113
++
++  - job_name: influxdb
++    static_configs:
++      - targets:
++        - vm3:9424
++
++  - job_name: haproxy
++    static_configs:
++      - targets:
++        - vm1:9101
++        - vm2:9101
++        - vm3:9101
++
++  - job_name: keepalived
++    static_configs:
++      - targets:
++        - vm1:9165
++        - vm2:9165
++        - vm3:9165
+
+changed: [vm3]
+
+RUNNING HANDLER [prometheus : restart prometheus] ******************************
+changed: [vm3]
+
+PLAY [Nginx] *******************************************************************
+
+TASK [nginx : nginx and updating] **********************************************
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx-common nginx-core
+Suggested packages:
+  libgd-tools fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx nginx-common nginx-core
+0 upgraded, 17 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx-common nginx-core
+Suggested packages:
+  libgd-tools fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx nginx-common nginx-core
+0 upgraded, 17 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm3]
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx-common nginx-core
+Suggested packages:
+  libgd-tools fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+  libjpeg-turbo8 libjpeg8 libnginx-mod-http-image-filter
+  libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libtiff5
+  libwebp6 libxpm4 nginx nginx-common nginx-core
+0 upgraded, 17 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+
+TASK [nginx : start nginx] *****************************************************
+ok: [vm3]
+ok: [vm1]
+ok: [vm2]
+
+TASK [nginx : replace html] ****************************************************
+--- before
++++ after: /Users/rei/ica0002/roles/nginx/files/index.html
+@@ -0,0 +1,8 @@
++<html>
++    <head>
++        <title>vm1 - Nginx</title>
++    </head>
++    <body>
++        <h1>Nginx running on vm1</h1>
++    </body>
++</html>
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/ica0002/roles/nginx/files/index.html
+@@ -0,0 +1,8 @@
++<html>
++    <head>
++        <title>vm1 - Nginx</title>
++    </head>
++    <body>
++        <h1>Nginx running on vm1</h1>
++    </body>
++</html>
+
+changed: [vm3]
+--- before
++++ after: /Users/rei/ica0002/roles/nginx/files/index.html
+@@ -0,0 +1,8 @@
++<html>
++    <head>
++        <title>vm1 - Nginx</title>
++    </head>
++    <body>
++        <h1>Nginx running on vm1</h1>
++    </body>
++</html>
+
+changed: [vm2]
+
+TASK [nginx : replace default] *************************************************
+--- before: /etc/nginx/sites-enabled/default
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpg_zbsmka/default
+@@ -1,91 +1,35 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
+-
+-# Default server configuration
+-#
+ server {
+ 	listen 80 default_server;
+-	listen [::]:80 default_server;
+-
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
+-
+-	root /var/www/html;
+-
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+ 	server_name _;
++	    large_client_header_buffers 4 16k;
+ 
+ 	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
++		proxy_pass http://localhost:8001;
++		proxy_set_header Host $http_host;
+ 	}
+ 
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
++	location /node-metrics {
++       proxy_pass http://localhost:9100/metrics;
++	}
+ 
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
+-}
++	location /bind-metrics {
++       proxy_pass http://localhost:9119/metrics;
++	}
++
++	location /mysql-metrics {
++       proxy_pass http://localhost:9104/metrics;
++	}
++
++	location /nginx-metrics {
++       proxy_pass http://localhost:9113/metrics;
++	}
+ 
+ 
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
++
++	location /haproxy-metrics {
++       proxy_pass http://localhost:9101/metrics;
++	}
++	location /keepalived-metrics {
++       proxy_pass http://localhost:9165/metrics;
++	}
++}
+
+changed: [vm1]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp0pjb5k2r/default
+@@ -1,91 +1,37 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
+-
+-# Default server configuration
+-#
+ server {
+ 	listen 80 default_server;
+-	listen [::]:80 default_server;
++	server_name _;
++	    large_client_header_buffers 4 16k;
+ 
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
+ 
+-	root /var/www/html;
+-
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+-	server_name _;
+-
+-	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
++	location /node-metrics {
++       proxy_pass http://localhost:9100/metrics;
+ 	}
+ 
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
+-
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
+-}
++	location /bind-metrics {
++       proxy_pass http://localhost:9119/metrics;
++	}
+ 
+ 
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
++	location /nginx-metrics {
++       proxy_pass http://localhost:9113/metrics;
++	}
++
++	location /prometheus {
++       proxy_pass http://localhost:9090;
++	}
++
++	location /grafana {
++       proxy_pass http://localhost:3001;
++	}
++
++	location /influxdb-metrics {
++       proxy_pass http://localhost:9424/metrics;
++	}
++	location /haproxy-metrics {
++       proxy_pass http://localhost:9101/metrics;
++	}
++	location /keepalived-metrics {
++       proxy_pass http://localhost:9165/metrics;
++	}
++}
+
+changed: [vm3]
+--- before: /etc/nginx/sites-enabled/default
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpdu25ku6k/default
+@@ -1,91 +1,35 @@
+-##
+-# You should look at the following URL's in order to grasp a solid understanding
+-# of Nginx configuration files in order to fully unleash the power of Nginx.
+-# https://www.nginx.com/resources/wiki/start/
+-# https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/
+-# https://wiki.debian.org/Nginx/DirectoryStructure
+-#
+-# In most cases, administrators will remove this file from sites-enabled/ and
+-# leave it as reference inside of sites-available where it will continue to be
+-# updated by the nginx packaging team.
+-#
+-# This file will automatically load configuration files provided by other
+-# applications, such as Drupal or Wordpress. These applications will be made
+-# available underneath a path with that package name, such as /drupal8.
+-#
+-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+-##
+-
+-# Default server configuration
+-#
+ server {
+ 	listen 80 default_server;
+-	listen [::]:80 default_server;
+-
+-	# SSL configuration
+-	#
+-	# listen 443 ssl default_server;
+-	# listen [::]:443 ssl default_server;
+-	#
+-	# Note: You should disable gzip for SSL traffic.
+-	# See: https://bugs.debian.org/773332
+-	#
+-	# Read up on ssl_ciphers to ensure a secure configuration.
+-	# See: https://bugs.debian.org/765782
+-	#
+-	# Self signed certs generated by the ssl-cert package
+-	# Don't use them in a production server!
+-	#
+-	# include snippets/snakeoil.conf;
+-
+-	root /var/www/html;
+-
+-	# Add index.php to the list if you are using PHP
+-	index index.html index.htm index.nginx-debian.html;
+-
+ 	server_name _;
++	    large_client_header_buffers 4 16k;
+ 
+ 	location / {
+-		# First attempt to serve request as file, then
+-		# as directory, then fall back to displaying a 404.
+-		try_files $uri $uri/ =404;
++		proxy_pass http://localhost:8001;
++		proxy_set_header Host $http_host;
+ 	}
+ 
+-	# pass PHP scripts to FastCGI server
+-	#
+-	#location ~ \.php$ {
+-	#	include snippets/fastcgi-php.conf;
+-	#
+-	#	# With php-fpm (or other unix sockets):
+-	#	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+-	#	# With php-cgi (or other tcp sockets):
+-	#	fastcgi_pass 127.0.0.1:9000;
+-	#}
++	location /node-metrics {
++       proxy_pass http://localhost:9100/metrics;
++	}
+ 
+-	# deny access to .htaccess files, if Apache's document root
+-	# concurs with nginx's one
+-	#
+-	#location ~ /\.ht {
+-	#	deny all;
+-	#}
+-}
++	location /bind-metrics {
++       proxy_pass http://localhost:9119/metrics;
++	}
++
++	location /mysql-metrics {
++       proxy_pass http://localhost:9104/metrics;
++	}
++
++	location /nginx-metrics {
++       proxy_pass http://localhost:9113/metrics;
++	}
+ 
+ 
+-# Virtual Host configuration for example.com
+-#
+-# You can move that to a different file under sites-available/ and symlink that
+-# to sites-enabled/ to enable it.
+-#
+-#server {
+-#	listen 80;
+-#	listen [::]:80;
+-#
+-#	server_name example.com;
+-#
+-#	root /var/www/example.com;
+-#	index index.html;
+-#
+-#	location / {
+-#		try_files $uri $uri/ =404;
+-#	}
+-#}
++
++	location /haproxy-metrics {
++       proxy_pass http://localhost:9101/metrics;
++	}
++	location /keepalived-metrics {
++       proxy_pass http://localhost:9165/metrics;
++	}
++}
+
+changed: [vm2]
+
+TASK [nginx : create exporter] *************************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpu8i9kswz/exporter
+@@ -0,0 +1,6 @@
++server {
++    listen 8080 default_server;
++    location = /stub_status {
++        stub_status;
++    }
++}
+
+changed: [vm1]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp7jmpaix1/exporter
+@@ -0,0 +1,6 @@
++server {
++    listen 8080 default_server;
++    location = /stub_status {
++        stub_status;
++    }
++}
+
+changed: [vm2]
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmptegq2_de/exporter
+@@ -0,0 +1,6 @@
++server {
++    listen 8080 default_server;
++    location = /stub_status {
++        stub_status;
++    }
++}
+
+changed: [vm3]
+
+TASK [nginx_exporter : prometheus nginx exporter] ******************************
+The following NEW packages will be installed:
+  prometheus-nginx-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm2]
+The following NEW packages will be installed:
+  prometheus-nginx-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm1]
+The following NEW packages will be installed:
+  prometheus-nginx-exporter
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm3]
+
+RUNNING HANDLER [nginx : Restart nginx] ****************************************
+changed: [vm1]
+changed: [vm2]
+changed: [vm3]
+
+RUNNING HANDLER [nginx_exporter : Start prometheus nginx exporters on boot] ****
+changed: [vm1]
+changed: [vm3]
+changed: [vm2]
+
+PLAY [influxDB] ****************************************************************
+
+TASK [influxdb : Add an Apt signing key, uses whichever key is at the URL] *****
+changed: [vm3]
+
+TASK [influxdb : Add specified repository into sources list] *******************
+--- before: /dev/null
++++ after: /etc/apt/sources.list.d/repos_influxdata_com_ubuntu.list
+@@ -0,0 +1 @@
++deb https://repos.influxdata.com/ubuntu focal stable
+
+changed: [vm3]
+
+TASK [influxdb : install influxdb and telegraf] ********************************
+The following NEW packages will be installed:
+  influxdb telegraf
+0 upgraded, 2 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm3]
+
+TASK [influxdb : start services] ***********************************************
+changed: [vm3]
+
+TASK [influxdb : start services] ***********************************************
+ok: [vm3]
+
+TASK [influxdb : copy telegraf.conf] *******************************************
+diff skipped: destination file size is greater than 104448
+changed: [vm3]
+
+TASK [influxdb : copy influxdb.conf] *******************************************
+--- before: /etc/influxdb/influxdb.conf
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpr0mbq88l/influxdb.conf
+@@ -1,596 +1,22 @@
+-### Welcome to the InfluxDB configuration file.
+-
+-# The values in this file override the default values used by the system if
+-# a config option is not specified. The commented out lines are the configuration
+-# field and the default value used. Uncommenting a line and changing the value
+-# will change the value used at runtime when the process is restarted.
+-
+-# Once every 24 hours InfluxDB will report usage data to usage.influxdata.com
+-# The data includes a random ID, os, arch, version, the number of series and other
+-# usage data. No data from user databases is ever transmitted.
+-# Change this option to true to disable reporting.
+-# reporting-disabled = false
+-
+-# Bind address to use for the RPC service for backup and restore.
+-# bind-address = "127.0.0.1:8088"
+-
+-###
+-### [meta]
+-###
+-### Controls the parameters for the Raft consensus group that stores metadata
+-### about the InfluxDB cluster.
+-###
+-
+ [meta]
+-  # Where the metadata/raft database is stored
+   dir = "/var/lib/influxdb/meta"
+-
+-  # Automatically create a default retention policy when creating a database.
+-  # retention-autocreate = true
+-
+-  # If log messages are printed for the meta service
+-  # logging-enabled = true
+-
+-###
+-### [data]
+-###
+-### Controls where the actual shard data for InfluxDB lives and how it is
+-### flushed from the WAL. "dir" may need to be changed to a suitable place
+-### for your system, but the WAL settings are an advanced configuration. The
+-### defaults should work for most systems.
+-###
+-
+ [data]
+-  # The directory where the TSM storage engine stores TSM files.
+   dir = "/var/lib/influxdb/data"
+-
+-  # The directory where the TSM storage engine stores WAL files.
+   wal-dir = "/var/lib/influxdb/wal"
+-
+-  # The amount of time that a write will wait before fsyncing.  A duration
+-  # greater than 0 can be used to batch up multiple fsync calls.  This is useful for slower
+-  # disks or when WAL write contention is seen.  A value of 0s fsyncs every write to the WAL.
+-  # Values in the range of 0-100ms are recommended for non-SSD disks.
+-  # wal-fsync-delay = "0s"
+-
+-
+-  # The type of shard index to use for new shards.  The default is an in-memory index that is
+-  # recreated at startup.  A value of "tsi1" will use a disk based index that supports higher
+-  # cardinality datasets.
+-  # index-version = "inmem"
+-
+-  # Trace logging provides more verbose output around the tsm engine. Turning
+-  # this on can provide more useful output for debugging tsm engine issues.
+-  # trace-logging-enabled = false
+-
+-  # Whether queries should be logged before execution. Very useful for troubleshooting, but will
+-  # log any sensitive data contained within a query.
+-  # query-log-enabled = true
+-
+-  # Provides more error checking. For example, SELECT INTO will err out inserting an +/-Inf value
+-  # rather than silently failing.
+-  # strict-error-handling = false
+-
+-  # Validates incoming writes to ensure keys only have valid unicode characters.
+-  # This setting will incur a small overhead because every key must be checked.
+-  # validate-keys = false
+-
+-  # Settings for the TSM engine
+-
+-  # CacheMaxMemorySize is the maximum size a shard's cache can
+-  # reach before it starts rejecting writes.
+-  # Valid size suffixes are k, m, or g (case insensitive, 1024 = 1k).
+-  # Values without a size suffix are in bytes.
+-  # cache-max-memory-size = "1g"
+-
+-  # CacheSnapshotMemorySize is the size at which the engine will
+-  # snapshot the cache and write it to a TSM file, freeing up memory
+-  # Valid size suffixes are k, m, or g (case insensitive, 1024 = 1k).
+-  # Values without a size suffix are in bytes.
+-  # cache-snapshot-memory-size = "25m"
+-
+-  # CacheSnapshotWriteColdDuration is the length of time at
+-  # which the engine will snapshot the cache and write it to
+-  # a new TSM file if the shard hasn't received writes or deletes
+-  # cache-snapshot-write-cold-duration = "10m"
+-
+-  # CompactFullWriteColdDuration is the duration at which the engine
+-  # will compact all TSM files in a shard if it hasn't received a
+-  # write or delete
+-  # compact-full-write-cold-duration = "4h"
+-
+-  # The maximum number of concurrent full and level compactions that can run at one time.  A
+-  # value of 0 results in 50% of runtime.GOMAXPROCS(0) used at runtime.  Any number greater
+-  # than 0 limits compactions to that value.  This setting does not apply
+-  # to cache snapshotting.
+-  # max-concurrent-compactions = 0
+-
+-  # CompactThroughput is the rate limit in bytes per second that we
+-  # will allow TSM compactions to write to disk. Note that short bursts are allowed
+-  # to happen at a possibly larger value, set by CompactThroughputBurst
+-  # compact-throughput = "48m"
+-
+-  # CompactThroughputBurst is the rate limit in bytes per second that we
+-  # will allow TSM compactions to write to disk.
+-  # compact-throughput-burst = "48m"
+-
+-  # If true, then the mmap advise value MADV_WILLNEED will be provided to the kernel with respect to
+-  # TSM files. This setting has been found to be problematic on some kernels, and defaults to off.
+-  # It might help users who have slow disks in some cases.
+-  # tsm-use-madv-willneed = false
+-
+-  # Settings for the inmem index
+-
+-  # The maximum series allowed per database before writes are dropped.  This limit can prevent
+-  # high cardinality issues at the database level.  This limit can be disabled by setting it to
+-  # 0.
+-  # max-series-per-database = 1000000
+-
+-  # The maximum number of tag values per tag that are allowed before writes are dropped.  This limit
+-  # can prevent high cardinality tag values from being written to a measurement.  This limit can be
+-  # disabled by setting it to 0.
+-  # max-values-per-tag = 100000
+-
+-  # Settings for the tsi1 index
+-
+-  # The threshold, in bytes, when an index write-ahead log file will compact
+-  # into an index file. Lower sizes will cause log files to be compacted more
+-  # quickly and result in lower heap usage at the expense of write throughput.
+-  # Higher sizes will be compacted less frequently, store more series in-memory,
+-  # and provide higher write throughput.
+-  # Valid size suffixes are k, m, or g (case insensitive, 1024 = 1k).
+-  # Values without a size suffix are in bytes.
+-  # max-index-log-file-size = "1m"
+-
+-  # The size of the internal cache used in the TSI index to store previously 
+-  # calculated series results. Cached results will be returned quickly from the cache rather
+-  # than needing to be recalculated when a subsequent query with a matching tag key/value 
+-  # predicate is executed. Setting this value to 0 will disable the cache, which may
+-  # lead to query performance issues.
+-  # This value should only be increased if it is known that the set of regularly used 
+-  # tag key/value predicates across all measurements for a database is larger than 100. An
+-  # increase in cache size may lead to an increase in heap usage.
+   series-id-set-cache-size = 100
+-
+-###
+-### [coordinator]
+-###
+-### Controls the clustering service configuration.
+-###
+-
++  query-log-enabled = false
+ [coordinator]
+-  # The default time a write request will wait until a "timeout" error is returned to the caller.
+-  # write-timeout = "10s"
+-
+-  # The maximum number of concurrent queries allowed to be executing at one time.  If a query is
+-  # executed and exceeds this limit, an error is returned to the caller.  This limit can be disabled
+-  # by setting it to 0.
+-  # max-concurrent-queries = 0
+-
+-  # The maximum time a query will is allowed to execute before being killed by the system.  This limit
+-  # can help prevent run away queries.  Setting the value to 0 disables the limit.
+-  # query-timeout = "0s"
+-
+-  # The time threshold when a query will be logged as a slow query.  This limit can be set to help
+-  # discover slow or resource intensive queries.  Setting the value to 0 disables the slow query logging.
+-  # log-queries-after = "0s"
+-
+-  # The maximum number of points a SELECT can process.  A value of 0 will make
+-  # the maximum point count unlimited.  This will only be checked every second so queries will not
+-  # be aborted immediately when hitting the limit.
+-  # max-select-point = 0
+-
+-  # The maximum number of series a SELECT can run.  A value of 0 will make the maximum series
+-  # count unlimited.
+-  # max-select-series = 0
+-
+-  # The maximum number of group by time bucket a SELECT can create.  A value of zero will max the maximum
+-  # number of buckets unlimited.
+-  # max-select-buckets = 0
+-
+-###
+-### [retention]
+-###
+-### Controls the enforcement of retention policies for evicting old data.
+-###
+-
+ [retention]
+-  # Determines whether retention policy enforcement enabled.
+-  # enabled = true
+-
+-  # The interval of time when retention policy enforcement checks run.
+-  # check-interval = "30m"
+-
+-###
+-### [shard-precreation]
+-###
+-### Controls the precreation of shards, so they are available before data arrives.
+-### Only shards that, after creation, will have both a start- and end-time in the
+-### future, will ever be created. Shards are never precreated that would be wholly
+-### or partially in the past.
+-
+ [shard-precreation]
+-  # Determines whether shard pre-creation service is enabled.
+-  # enabled = true
+-
+-  # The interval of time when the check to pre-create new shards runs.
+-  # check-interval = "10m"
+-
+-  # The default period ahead of the endtime of a shard group that its successor
+-  # group is created.
+-  # advance-period = "30m"
+-
+-###
+-### Controls the system self-monitoring, statistics and diagnostics.
+-###
+-### The internal database for monitoring data is created automatically if
+-### if it does not already exist. The target retention within this database
+-### is called 'monitor' and is also created with a retention period of 7 days
+-### and a replication factor of 1, if it does not exist. In all cases the
+-### this retention policy is configured as the default for the database.
+-
+ [monitor]
+-  # Whether to record statistics internally.
+-  # store-enabled = true
+-
+-  # The destination database for recorded statistics
+-  # store-database = "_internal"
+-
+-  # The interval at which to record statistics
+-  # store-interval = "10s"
+-
+-###
+-### [http]
+-###
+-### Controls how the HTTP endpoints are configured. These are the primary
+-### mechanism for getting data into and out of InfluxDB.
+-###
+-
+ [http]
+-  # Determines whether HTTP endpoint is enabled.
+-  # enabled = true
+-
+-  # Determines whether the Flux query endpoint is enabled.
+-  # flux-enabled = false
+-
+-  # Determines whether the Flux query logging is enabled.
+-  # flux-log-enabled = false
+-
+-  # The bind address used by the HTTP service.
+-  # bind-address = ":8086"
+-
+-  # Determines whether user authentication is enabled over HTTP/HTTPS.
+-  # auth-enabled = false
+-
+-  # The default realm sent back when issuing a basic auth challenge.
+-  # realm = "InfluxDB"
+-
+-  # Determines whether HTTP request logging is enabled.
+-  # log-enabled = true
+-
+-  # Determines whether the HTTP write request logs should be suppressed when the log is enabled.
+-  # suppress-write-log = false
+-
+-  # When HTTP request logging is enabled, this option specifies the path where
+-  # log entries should be written. If unspecified, the default is to write to stderr, which
+-  # intermingles HTTP logs with internal InfluxDB logging.
+-  #
+-  # If influxd is unable to access the specified path, it will log an error and fall back to writing
+-  # the request log to stderr.
+-  # access-log-path = ""
+-
+-  # Filters which requests should be logged. Each filter is of the pattern NNN, NNX, or NXX where N is
+-  # a number and X is a wildcard for any number. To filter all 5xx responses, use the string 5xx.
+-  # If multiple filters are used, then only one has to match. The default is to have no filters which
+-  # will cause every request to be printed.
+-  # access-log-status-filters = []
+-
+-  # Determines whether detailed write logging is enabled.
+-  # write-tracing = false
+-
+-  # Determines whether the pprof endpoint is enabled.  This endpoint is used for
+-  # troubleshooting and monitoring.
+-  # pprof-enabled = true
+-
+-  # Enables authentication on pprof endpoints. Users will need admin permissions
+-  # to access the pprof endpoints when this setting is enabled. This setting has
+-  # no effect if either auth-enabled or pprof-enabled are set to false.
+-  # pprof-auth-enabled = false
+-
+-  # Enables a pprof endpoint that binds to localhost:6060 immediately on startup.
+-  # This is only needed to debug startup issues.
+-  # debug-pprof-enabled = false
+-
+-  # Enables authentication on the /ping, /metrics, and deprecated /status
+-  # endpoints. This setting has no effect if auth-enabled is set to false.
+-  # ping-auth-enabled = false
+-
+-  # Determines whether HTTPS is enabled.
+-  # https-enabled = false
+-
+-  # The SSL certificate to use when HTTPS is enabled.
+-  # https-certificate = "/etc/ssl/influxdb.pem"
+-
+-  # Use a separate private key location.
+-  # https-private-key = ""
+-
+-  # The JWT auth shared secret to validate requests using JSON web tokens.
+-  # shared-secret = ""
+-
+-  # The default chunk size for result sets that should be chunked.
+-  # max-row-limit = 0
+-
+-  # The maximum number of HTTP connections that may be open at once.  New connections that
+-  # would exceed this limit are dropped.  Setting this value to 0 disables the limit.
+-  # max-connection-limit = 0
+-
+-  # Enable http service over unix domain socket
+-  # unix-socket-enabled = false
+-
+-  # The path of the unix domain socket.
+-  # bind-socket = "/var/run/influxdb.sock"
+-
+-  # The maximum size of a client request body, in bytes. Setting this value to 0 disables the limit.
+-  # max-body-size = 25000000
+-
+-  # The maximum number of writes processed concurrently.
+-  # Setting this to 0 disables the limit.
+-  # max-concurrent-write-limit = 0
+-
+-  # The maximum number of writes queued for processing.
+-  # Setting this to 0 disables the limit.
+-  # max-enqueued-write-limit = 0
+-
+-  # The maximum duration for a write to wait in the queue to be processed.
+-  # Setting this to 0 or setting max-concurrent-write-limit to 0 disables the limit.
+-  # enqueued-write-timeout = 0
+-
+-	# User supplied HTTP response headers
+-	#
+-	# [http.headers]
+-	#   X-Header-1 = "Header Value 1"
+-	#   X-Header-2 = "Header Value 2"
+-
+-###
+-### [logging]
+-###
+-### Controls how the logger emits logs to the output.
+-###
+-
++  log-enabled = false
++  write-tracing = false
+ [logging]
+-  # Determines which log encoder to use for logs. Available options
+-  # are auto, logfmt, and json. auto will use a more a more user-friendly
+-  # output format if the output terminal is a TTY, but the format is not as
+-  # easily machine-readable. When the output is a non-TTY, auto will use
+-  # logfmt.
+-  # format = "auto"
+-
+-  # Determines which level of logs will be emitted. The available levels
+-  # are error, warn, info, and debug. Logs that are equal to or above the
+-  # specified level will be emitted.
+-  # level = "info"
+-
+-  # Suppresses the logo output that is printed when the program is started.
+-  # The logo is always suppressed if STDOUT is not a TTY.
+-  # suppress-logo = false
+-
+-###
+-### [subscriber]
+-###
+-### Controls the subscriptions, which can be used to fork a copy of all data
+-### received by the InfluxDB host.
+-###
+-
+ [subscriber]
+-  # Determines whether the subscriber service is enabled.
+-  # enabled = true
+-
+-  # The default timeout for HTTP writes to subscribers.
+-  # http-timeout = "30s"
+-
+-  # Allows insecure HTTPS connections to subscribers.  This is useful when testing with self-
+-  # signed certificates.
+-  # insecure-skip-verify = false
+-
+-  # The path to the PEM encoded CA certs file. If the empty string, the default system certs will be used
+-  # ca-certs = ""
+-
+-  # The number of writer goroutines processing the write channel.
+-  # write-concurrency = 40
+-
+-  # The number of in-flight writes buffered in the write channel.
+-  # write-buffer-size = 1000
+-
+-
+-###
+-### [[graphite]]
+-###
+-### Controls one or many listeners for Graphite data.
+-###
+-
+ [[graphite]]
+-  # Determines whether the graphite endpoint is enabled.
+-  # enabled = false
+-  # database = "graphite"
+-  # retention-policy = ""
+-  # bind-address = ":2003"
+-  # protocol = "tcp"
+-  # consistency-level = "one"
+-
+-  # These next lines control how batching works. You should have this enabled
+-  # otherwise you could get dropped metrics or poor performance. Batching
+-  # will buffer points in memory if you have many coming in.
+-
+-  # Flush if this many points get buffered
+-  # batch-size = 5000
+-
+-  # number of batches that may be pending in memory
+-  # batch-pending = 10
+-
+-  # Flush at least this often even if we haven't hit buffer limit
+-  # batch-timeout = "1s"
+-
+-  # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
+-  # udp-read-buffer = 0
+-
+-  ### This string joins multiple matching 'measurement' values providing more control over the final measurement name.
+-  # separator = "."
+-
+-  ### Default tags that will be added to all metrics.  These can be overridden at the template level
+-  ### or by tags extracted from metric
+-  # tags = ["region=us-east", "zone=1c"]
+-
+-  ### Each template line requires a template pattern.  It can have an optional
+-  ### filter before the template and separated by spaces.  It can also have optional extra
+-  ### tags following the template.  Multiple tags should be separated by commas and no spaces
+-  ### similar to the line protocol format.  There can be only one default template.
+-  # templates = [
+-  #   "*.app env.service.resource.measurement",
+-  #   # Default template
+-  #   "server.*",
+-  # ]
+-
+-###
+-### [collectd]
+-###
+-### Controls one or many listeners for collectd data.
+-###
+-
+ [[collectd]]
+-  # enabled = false
+-  # bind-address = ":25826"
+-  # database = "collectd"
+-  # retention-policy = ""
+-  #
+-  # The collectd service supports either scanning a directory for multiple types
+-  # db files, or specifying a single db file.
+-  # typesdb = "/usr/local/share/collectd"
+-  #
+-  # security-level = "none"
+-  # auth-file = "/etc/collectd/auth_file"
+-
+-  # These next lines control how batching works. You should have this enabled
+-  # otherwise you could get dropped metrics or poor performance. Batching
+-  # will buffer points in memory if you have many coming in.
+-
+-  # Flush if this many points get buffered
+-  # batch-size = 5000
+-
+-  # Number of batches that may be pending in memory
+-  # batch-pending = 10
+-
+-  # Flush at least this often even if we haven't hit buffer limit
+-  # batch-timeout = "10s"
+-
+-  # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
+-  # read-buffer = 0
+-
+-  # Multi-value plugins can be handled two ways.
+-  # "split" will parse and store the multi-value plugin data into separate measurements
+-  # "join" will parse and store the multi-value plugin as a single multi-value measurement.
+-  # "split" is the default behavior for backward compatibility with previous versions of influxdb.
+-  # parse-multivalue-plugin = "split"
+-###
+-### [opentsdb]
+-###
+-### Controls one or many listeners for OpenTSDB data.
+-###
+-
+ [[opentsdb]]
+-  # enabled = false
+-  # bind-address = ":4242"
+-  # database = "opentsdb"
+-  # retention-policy = ""
+-  # consistency-level = "one"
+-  # tls-enabled = false
+-  # certificate= "/etc/ssl/influxdb.pem"
+-
+-  # Log an error for every malformed point.
+-  # log-point-errors = true
+-
+-  # These next lines control how batching works. You should have this enabled
+-  # otherwise you could get dropped metrics or poor performance. Only points
+-  # metrics received over the telnet protocol undergo batching.
+-
+-  # Flush if this many points get buffered
+-  # batch-size = 1000
+-
+-  # Number of batches that may be pending in memory
+-  # batch-pending = 5
+-
+-  # Flush at least this often even if we haven't hit buffer limit
+-  # batch-timeout = "1s"
+-
+-###
+-### [[udp]]
+-###
+-### Controls the listeners for InfluxDB line protocol data via UDP.
+-###
+-
+ [[udp]]
+-  # enabled = false
+-  # bind-address = ":8089"
+-  # database = "udp"
+-  # retention-policy = ""
+-
+-  # InfluxDB precision for timestamps on received points ("" or "n", "u", "ms", "s", "m", "h")
+-  # precision = ""
+-
+-  # These next lines control how batching works. You should have this enabled
+-  # otherwise you could get dropped metrics or poor performance. Batching
+-  # will buffer points in memory if you have many coming in.
+-
+-  # Flush if this many points get buffered
+-  # batch-size = 5000
+-
+-  # Number of batches that may be pending in memory
+-  # batch-pending = 10
+-
+-  # Will flush at least this often even if we haven't hit buffer limit
+-  # batch-timeout = "1s"
+-
+-  # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
+-  # read-buffer = 0
+-
+-###
+-### [continuous_queries]
+-###
+-### Controls how continuous queries are run within InfluxDB.
+-###
+-
+ [continuous_queries]
+-  # Determines whether the continuous query service is enabled.
+-  # enabled = true
+-
+-  # Controls whether queries are logged when executed by the CQ service.
+-  # log-enabled = true
+-
+-  # Controls whether queries are logged to the self-monitoring data store.
+-  # query-stats-enabled = false
+-
+-  # interval for how often continuous queries will be checked if they need to run
+-  # run-interval = "1s"
+-
+-###
+-### [tls]
+-###
+-### Global configuration settings for TLS in InfluxDB.
+-###
+-
+ [tls]
+-  # Determines the available set of cipher suites. See https://golang.org/pkg/crypto/tls/#pkg-constants
+-  # for a list of available ciphers, which depends on the version of Go (use the query
+-  # SHOW DIAGNOSTICS to see the version of Go used to build InfluxDB). If not specified, uses
+-  # the default settings from Go's crypto/tls package.
+-  # ciphers = [
+-  #   "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+-  #   "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
+-  # ]
+-
+-  # Minimum version of the tls protocol that will be negotiated. If not specified, uses the
+-  # default settings from Go's crypto/tls package.
+-  # min-version = "tls1.2"
+-
+-  # Maximum version of the tls protocol that will be negotiated. If not specified, uses the
+-  # default settings from Go's crypto/tls package.
+-  # max-version = "tls1.3"
+
+changed: [vm3]
+
+TASK [pinger : install fping] **************************************************
+The following NEW packages will be installed:
+  fping
+0 upgraded, 1 newly installed, 0 to remove and 138 not upgraded.
+changed: [vm3]
+
+TASK [pinger : install curl] ***************************************************
+The following additional packages will be installed:
+  libcurl4
+The following packages will be upgraded:
+  curl libcurl4
+2 upgraded, 0 newly installed, 0 to remove and 136 not upgraded.
+changed: [vm3]
+
+TASK [pinger : pinger.sh] ******************************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp1tzx2klv/pinger.sh
+@@ -0,0 +1,26 @@
++#!/bin/bash
++
++# Script contains several (more than 1) security issues.
++# Find them and fix them to get bonus on exam.
++# Problem example: SQL injection.
++
++for t in database_url database_name targets; do
++  if ! grep -q "^${t}=" /etc/pinger/pinger.conf; then
++    logger "$0 Failed to get $t from config"
++    exit 1
++  fi
++done
++
++which fping > /dev/null || (logger "fping not found"; exit 1)
++
++db_url=$(grep "^database_url=" /etc/pinger/pinger.conf | sed 's/^.*=//')
++db_name=$(grep "^database_name=" /etc/pinger/pinger.conf | sed 's/^.*=//')
++targets=$(grep "^targets=" /etc/pinger/pinger.conf | sed 's/^.*=//' | sed 's/\(,\|;\)/ /g')
++
++curl -i -XPOST "${db_url}/query" --data-urlencode "q=CREATE DATABASE $db_name" 1>/dev/null 2>/dev/null
++
++while true; do
++  result=$(fping -C1 -q $targets 2>&1 | awk -v db=$db_name '{print db",dst="$1" rtt="$3}')
++  curl -i -XPOST "${db_url}/write?db=$db_name" --data-binary "$result" 1>/dev/null 2>/dev/null
++ sleep 1
++done
+
+changed: [vm3]
+
+TASK [pinger : Create directory] ***********************************************
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/etc/pinger/",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm3]
+
+TASK [pinger : pinger.conf] ****************************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp6_nkz1jl/pinger.conf
+@@ -0,0 +1,3 @@
++database_url=http://vm3:8086
++database_name=latency
++targets=google.com,cloudflare.com,twitter.com
+
+changed: [vm3]
+
+TASK [pinger : pinger service] *************************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp1bk3pdcm/pinger.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Pinger service configuration file
++Documentation=https://github.com/romankuchin/ica0002-2021/blob/main/08-logging/08-files/pinger.service
++After=network-online.target
++
++[Service]
++User=root
++ExecStart=/usr/local/bin/pinger
++
++[Install]
++WantedBy=multi-user.target
+
+changed: [vm3]
+
+TASK [pinger : Start pinger on boot] *******************************************
+changed: [vm3]
+
+TASK [influxdb_exporter : Prometheus influxdb exporter] ************************
+changed: [vm3]
+
+TASK [influxdb_exporter : Copy service template] *******************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp4y_nbmp3/prometheus-influxdb-stats-exporter.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Pinger service configuration file
++Documentation=https://github.com/carlpett/influxdb_stats_exporter
++After=network-online.target
++
++[Service]
++User=root
++ExecStart=/usr/local/bin/influxdb
++
++[Install]
++WantedBy=multi-user.target
+
+changed: [vm3]
+
+TASK [influxdb_exporter : Influxdb Exporter] ***********************************
+changed: [vm3]
+
+TASK [influxdb_backup : Create directory] **************************************
+--- before
++++ after
+@@ -1,7 +1,7 @@
+ {
+-    "group": 0,
+-    "mode": "0755",
+-    "owner": 0,
++    "group": 34,
++    "mode": "0700",
++    "owner": 34,
+     "path": "/home/backup/influxdb",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm3]
+
+TASK [influxdb_backup : Create file influxdb-backup] ***************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmp2i62p5l1/influxdb-backup
+@@ -0,0 +1,3 @@
++0 1 * * 0-6 rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb
++30 1 * * 0  backup  duplicity --no-encryption full /home/backup/influxdb/ rsync://anboit@backup.reily.tech//home/anboit/
++30 1 * * 1-6  backup  duplicity --no-encryption incremental /home/backup/influxdb/ rsync://anboit@backup.reily.tech//home/anboit/
+
+changed: [vm3]
+
+RUNNING HANDLER [influxdb : restart telegraf] **********************************
+changed: [vm3]
+
+RUNNING HANDLER [pinger : Daemon_reload] ***************************************
+ok: [vm3]
+
+RUNNING HANDLER [pinger : Restart pinger] **************************************
+changed: [vm3]
+
+RUNNING HANDLER [influxdb_exporter : Daemon reload] ****************************
+ok: [vm3]
+
+RUNNING HANDLER [influxdb_exporter : Restart influxdb exporter] ****************
+changed: [vm3]
+
+PLAY [Grafana] *****************************************************************
+
+TASK [docker : Docker package] *************************************************
+The following additional packages will be installed:
+  bridge-utils containerd dnsmasq-base libidn11 pigz python3-websocket runc
+  ubuntu-fan
+Suggested packages:
+  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-doc
+  rinse zfs-fuse | zfsutils
+The following NEW packages will be installed:
+  bridge-utils containerd dnsmasq-base docker.io libidn11 pigz python3-docker
+  python3-websocket runc ubuntu-fan
+0 upgraded, 10 newly installed, 0 to remove and 136 not upgraded.
+changed: [vm3]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm3]
+
+TASK [docker : Log into DockerHub] *********************************************
+changed: [vm3]
+
+TASK [grafana : Create directories] ********************************************
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/grafana/provisioning/dashboards",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm3] => (item=/opt/grafana/provisioning/dashboards)
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+     "path": "/opt/grafana/provisioning/datasources",
+-    "state": "absent"
++    "state": "directory"
+ }
+
+changed: [vm3] => (item=/opt/grafana/provisioning/datasources)
+
+TASK [grafana : copy grafana ini] **********************************************
+changed: [vm3]
+
+TASK [grafana : copy grafana datasource] ***************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpzi8qwit8/sample.yaml
+@@ -0,0 +1,32 @@
++---
++apiVersion: 1
++datasources:
++  - name: prometheus
++    type: prometheus
++    access: proxy
++    orgId: 1
++    url: http://vm3:9090/prometheus
++    password:
++    user:
++    database:
++    isDefault: true
++    version: 1
++    editable: false
++
++  - name: InfluxDB
++    type: influxdb
++    access: proxy
++    orgId: 1
++    url: http://vm3:8086
++    database: latency
++    version: 1
++    editable: false
++
++  - name: InfluxDB-telegraf
++    type: influxdb
++    access: proxy
++    orgId: 1
++    url: http://vm3:8086
++    database: telegraf
++    version: 1
++    editable: false
+
+changed: [vm3]
+
+TASK [grafana : copy grafana dashboard] ****************************************
+--- before
++++ after: /Users/rei/.ansible/tmp/ansible-local-42973s9ke9rjw/tmpvhx6b_ph/main.yaml
+@@ -0,0 +1,10 @@
++---
++apiVersion: 1
++providers:
++  - name: Main
++    orgId: 1
++    folder: ''
++    folderUid: ''
++    type: file
++    options: 
++      path: /etc/grafana/provisioning/dashboards
+
+changed: [vm3]
+
+TASK [grafana : Copy jsons] ****************************************************
+--- before
++++ after: /Users/rei/ica0002/roles/grafana/files/main.json
+@@ -0,0 +1,1064 @@
++{
++  "annotations": {
++    "list": [
++      {
++        "builtIn": 1,
++        "datasource": "-- Grafana --",
++        "enable": true,
++        "hide": true,
++        "iconColor": "rgba(0, 211, 255, 1)",
++        "name": "Annotations & Alerts",
++        "target": {
++          "limit": 100,
++          "matchAny": false,
++          "tags": [],
++          "type": "dashboard"
++        },
++        "type": "dashboard"
++      }
++    ]
++  },
++  "editable": true,
++  "gnetId": null,
++  "graphTooltip": 0,
++  "id": 1,
++  "links": [
++    {
++      "asDropdown": false,
++      "icon": "external link",
++      "includeVars": false,
++      "keepTime": false,
++      "tags": [],
++      "targetBlank": false,
++      "title": "Syslog",
++      "tooltip": "",
++      "type": "dashboards",
++      "url": ""
++    }
++  ],
++  "panels": [
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "😡"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "🐸"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 24,
++        "x": 0,
++        "y": 0
++      },
++      "id": 6,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "vertical",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "auto"
++      },
++      "pluginVersion": "8.1.8",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "bind_up",
++          "interval": "",
++          "legendFormat": "{{job}}@{{instance}}",
++          "refId": "A"
++        },
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "influxdb_exporter_stats_query_success",
++          "hide": false,
++          "interval": "",
++          "legendFormat": "{{job}}@{{instance}}",
++          "refId": "B"
++        },
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "mysql_up",
++          "hide": false,
++          "interval": "",
++          "legendFormat": "{{job}}@{{instance}}",
++          "refId": "C"
++        },
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "nginx_up",
++          "hide": false,
++          "instant": false,
++          "interval": "",
++          "legendFormat": "{{job}}@{{instance}}",
++          "refId": "D"
++        },
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "haproxy_up",
++          "hide": false,
++          "instant": false,
++          "interval": "",
++          "legendFormat": "{{job}}@{{instance}}",
++          "refId": "E"
++        }
++      ],
++      "title": "Services",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "lineInterpolation": "linear",
++            "lineStyle": {
++              "fill": "solid"
++            },
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "decbytes"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 13,
++        "w": 12,
++        "x": 0,
++        "y": 5
++      },
++      "id": 8,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom"
++        },
++        "tooltip": {
++          "mode": "single"
++        }
++      },
++      "pluginVersion": "8.3.0",
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Memory usage",
++      "type": "timeseries"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "1": {
++                  "color": "dark-purple",
++                  "index": 0,
++                  "text": "Slave"
++                },
++                "2": {
++                  "color": "dark-orange",
++                  "index": 1,
++                  "text": "Master"
++                }
++              },
++              "type": "value"
++            },
++            {
++              "options": {
++                "match": "null",
++                "result": {
++                  "color": "dark-red",
++                  "index": 2,
++                  "text": "Not working"
++                }
++              },
++              "type": "special"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 12,
++        "y": 5
++      },
++      "id": 17,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "auto"
++      },
++      "pluginVersion": "8.1.8",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "keepalived_vrrp_state {instance=\"vm1:9165\"}",
++          "instant": true,
++          "interval": "",
++          "legendFormat": "{{job}}@{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Keepalived status Vm1",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "😡"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "🐸"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 8,
++        "w": 6,
++        "x": 18,
++        "y": 5
++      },
++      "id": 21,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "auto"
++      },
++      "pluginVersion": "8.1.8",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "haproxy_server_up {instance=\"vm2:9101\"}",
++          "interval": "",
++          "legendFormat": "{{server}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Vm 2",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "😡"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "🐸"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 8,
++        "w": 6,
++        "x": 12,
++        "y": 10
++      },
++      "id": 20,
++      "options": {
++        "colorMode": "background",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "auto"
++      },
++      "pluginVersion": "8.1.8",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "haproxy_server_up {instance=\"vm1:9101\"}",
++          "interval": "",
++          "legendFormat": "{{server}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Vm 1",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "1": {
++                  "color": "dark-purple",
++                  "index": 0,
++                  "text": "Slave"
++                },
++                "2": {
++                  "color": "dark-orange",
++                  "index": 1,
++                  "text": "Master"
++                }
++              },
++              "type": "value"
++            },
++            {
++              "options": {
++                "match": "null",
++                "result": {
++                  "color": "dark-red",
++                  "index": 2,
++                  "text": "Not working"
++                }
++              },
++              "type": "special"
++            }
++          ],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 5,
++        "w": 6,
++        "x": 18,
++        "y": 13
++      },
++      "id": 22,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "none",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "auto"
++      },
++      "pluginVersion": "8.1.8",
++      "targets": [
++        {
++          "datasource": {
++            "type": "prometheus",
++            "uid": "P1809F7CD0C75ACF3"
++          },
++          "exemplar": true,
++          "expr": "keepalived_vrrp_state {instance=\"vm2:9165\"}",
++          "instant": true,
++          "interval": "",
++          "legendFormat": "{{job}}@{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Keepalived status Vm 2",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "ops"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 9,
++        "w": 8,
++        "x": 0,
++        "y": 18
++      },
++      "id": 11,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom"
++        },
++        "tooltip": {
++          "mode": "single"
++        }
++      },
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "rate(mysql_global_status_commands_total{command=~\"select|show_status|update\"}[5m])",
++          "interval": "",
++          "legendFormat": "{{instance}}: {{command}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL query rate",
++      "type": "timeseries"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "ops"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 9,
++        "w": 8,
++        "x": 8,
++        "y": 18
++      },
++      "id": 15,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom"
++        },
++        "tooltip": {
++          "mode": "single"
++        }
++      },
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "rate(influxdb_write_write_ok[5m])",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "InfluxDB write rate",
++      "type": "timeseries"
++    },
++    {
++      "datasource": "InfluxDB",
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "ms"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 9,
++        "w": 8,
++        "x": 16,
++        "y": 18
++      },
++      "id": 14,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom"
++        },
++        "tooltip": {
++          "mode": "single"
++        }
++      },
++      "targets": [
++        {
++          "groupBy": [
++            {
++              "params": [
++                "$__interval"
++              ],
++              "type": "time"
++            },
++            {
++              "params": [
++                "dst"
++              ],
++              "type": "tag"
++            },
++            {
++              "params": [
++                "null"
++              ],
++              "type": "fill"
++            }
++          ],
++          "measurement": "latency",
++          "orderByTime": "ASC",
++          "policy": "default",
++          "refId": "A",
++          "resultFormat": "time_series",
++          "select": [
++            [
++              {
++                "params": [
++                  "rtt"
++                ],
++                "type": "field"
++              },
++              {
++                "params": [],
++                "type": "mean"
++              }
++            ]
++          ],
++          "tags": []
++        }
++      ],
++      "title": "Ping",
++      "type": "timeseries"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "ops"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 9,
++        "w": 12,
++        "x": 0,
++        "y": 27
++      },
++      "id": 12,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom"
++        },
++        "tooltip": {
++          "mode": "single"
++        }
++      },
++      "pluginVersion": "8.2.2",
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "rate(nginx_http_requests_total[5m])",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "Nginx request rate",
++      "type": "timeseries"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "ops"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 9,
++        "w": 12,
++        "x": 12,
++        "y": 27
++      },
++      "id": 10,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom"
++        },
++        "tooltip": {
++          "mode": "single"
++        }
++      },
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "rate(bind_resolver_queries_total{type=~\"A|AAAA|NS|SRV\"}[5m])",
++          "interval": "",
++          "legendFormat": "{{instance}}: {{type}}",
++          "refId": "A"
++        }
++      ],
++      "title": "DNS query rate",
++      "type": "timeseries"
++    }
++  ],
++  "refresh": "1s",
++  "schemaVersion": 30,
++  "style": "dark",
++  "tags": [],
++  "templating": {
++    "list": []
++  },
++  "time": {
++    "from": "now-5m",
++    "to": "now"
++  },
++  "timepicker": {},
++  "timezone": "",
++  "title": "Main",
++  "uid": "main",
++  "version": 3
++}
+\ No newline at end of file
+
+changed: [vm3] => (item=main.json)
+--- before
++++ after: /Users/rei/ica0002/roles/grafana/files/mysql.json
+@@ -0,0 +1,510 @@
++{
++  "annotations": {
++    "list": [
++      {
++        "builtIn": 1,
++        "datasource": "-- Grafana --",
++        "enable": true,
++        "hide": true,
++        "iconColor": "rgba(0, 211, 255, 1)",
++        "name": "Annotations & Alerts",
++        "target": {
++          "limit": 100,
++          "matchAny": false,
++          "tags": [],
++          "type": "dashboard"
++        },
++        "type": "dashboard"
++      }
++    ]
++  },
++  "editable": true,
++  "fiscalYearStartMonth": 0,
++  "gnetId": null,
++  "graphTooltip": 0,
++  "id": 2,
++  "links": [
++    {
++      "asDropdown": false,
++      "icon": "external link",
++      "includeVars": false,
++      "keepTime": false,
++      "tags": [],
++      "targetBlank": false,
++      "title": "Syslog",
++      "tooltip": "",
++      "type": "dashboards",
++      "url": ""
++    }
++  ],
++  "liveNow": false,
++  "panels": [
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "red",
++                  "index": 1,
++                  "text": "😡"
++                },
++                "1": {
++                  "color": "green",
++                  "index": 0,
++                  "text": "🐸"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 3,
++        "w": 24,
++        "x": 0,
++        "y": 0
++      },
++      "id": 14,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "vertical",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "value"
++      },
++      "pluginVersion": "8.2.5",
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "mysql_up",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL server status",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 3,
++        "w": 24,
++        "x": 0,
++        "y": 3
++      },
++      "id": 12,
++      "options": {
++        "colorMode": "none",
++        "graphMode": "none",
++        "justifyMode": "center",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "value"
++      },
++      "pluginVersion": "8.2.5",
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "mysql_global_variables_server_id",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL server id",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "orange",
++                  "index": 1,
++                  "text": "Read/write"
++                },
++                "1": {
++                  "color": "blue",
++                  "index": 0,
++                  "text": "Read only"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 3,
++        "w": 24,
++        "x": 0,
++        "y": 6
++      },
++      "id": 13,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "value"
++      },
++      "pluginVersion": "8.2.5",
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "mysql_global_variables_read_only",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL server mode",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "orange",
++                  "index": 1,
++                  "text": "Stopped"
++                },
++                "1": {
++                  "color": "blue",
++                  "index": 0,
++                  "text": "Running"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 3,
++        "w": 24,
++        "x": 0,
++        "y": 9
++      },
++      "id": 16,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "value"
++      },
++      "pluginVersion": "8.2.5",
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "mysql_slave_status_slave_io_running",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL replica IO thread",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "thresholds"
++          },
++          "mappings": [
++            {
++              "options": {
++                "0": {
++                  "color": "#FF9830",
++                  "index": 1,
++                  "text": "Stopped"
++                },
++                "1": {
++                  "color": "blue",
++                  "index": 0,
++                  "text": "Running"
++                }
++              },
++              "type": "value"
++            }
++          ],
++          "max": 1,
++          "min": 0,
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "red",
++                "value": null
++              },
++              {
++                "color": "green",
++                "value": 1
++              }
++            ]
++          }
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 3,
++        "w": 24,
++        "x": 0,
++        "y": 12
++      },
++      "id": 17,
++      "options": {
++        "colorMode": "value",
++        "graphMode": "area",
++        "justifyMode": "auto",
++        "orientation": "auto",
++        "reduceOptions": {
++          "calcs": [
++            "last"
++          ],
++          "fields": "",
++          "values": false
++        },
++        "text": {},
++        "textMode": "value"
++      },
++      "pluginVersion": "8.2.5",
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "mysql_slave_status_slave_sql_running",
++          "interval": "",
++          "legendFormat": "{{instance}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL replica SQL thread",
++      "type": "stat"
++    },
++    {
++      "datasource": null,
++      "fieldConfig": {
++        "defaults": {
++          "color": {
++            "mode": "palette-classic"
++          },
++          "custom": {
++            "axisLabel": "",
++            "axisPlacement": "auto",
++            "barAlignment": 0,
++            "drawStyle": "line",
++            "fillOpacity": 0,
++            "gradientMode": "none",
++            "hideFrom": {
++              "legend": false,
++              "tooltip": false,
++              "viz": false
++            },
++            "lineInterpolation": "linear",
++            "lineWidth": 1,
++            "pointSize": 5,
++            "scaleDistribution": {
++              "type": "linear"
++            },
++            "showPoints": "auto",
++            "spanNulls": false,
++            "stacking": {
++              "group": "A",
++              "mode": "none"
++            },
++            "thresholdsStyle": {
++              "mode": "off"
++            }
++          },
++          "mappings": [],
++          "thresholds": {
++            "mode": "absolute",
++            "steps": [
++              {
++                "color": "green",
++                "value": null
++              },
++              {
++                "color": "red",
++                "value": 80
++              }
++            ]
++          },
++          "unit": "ops"
++        },
++        "overrides": []
++      },
++      "gridPos": {
++        "h": 8,
++        "w": 24,
++        "x": 0,
++        "y": 15
++      },
++      "id": 15,
++      "options": {
++        "legend": {
++          "calcs": [],
++          "displayMode": "list",
++          "placement": "bottom"
++        },
++        "tooltip": {
++          "mode": "single"
++        }
++      },
++      "targets": [
++        {
++          "exemplar": true,
++          "expr": "rate(mysql_global_status_commands_total{command=~\"select|show_status|update\"}[5m])",
++          "interval": "",
++          "legendFormat": "{{instance}}: {{command}}",
++          "refId": "A"
++        }
++      ],
++      "title": "MySQL query rate",
++      "type": "timeseries"
++    }
++  ],
++  "refresh": "30s",
++  "schemaVersion": 32,
++  "style": "dark",
++  "tags": [],
++  "templating": {
++    "list": []
++  },
++  "time": {
++    "from": "now-1h",
++    "to": "now"
++  },
++  "timepicker": {},
++  "timezone": "",
++  "title": "MySQL",
++  "uid": "mysql",
++  "version": 1
++}
+\ No newline at end of file
+
+changed: [vm3] => (item=mysql.json)
+--- before
++++ after: /Users/rei/ica0002/roles/grafana/files/syslog.json
+@@ -0,0 +1,992 @@
++{
++    "annotations": {
++      "list": [
++        {
++          "builtIn": 1,
++          "datasource": "-- Grafana --",
++          "enable": true,
++          "hide": true,
++          "iconColor": "rgba(0, 211, 255, 1)",
++          "name": "Annotations & Alerts",
++          "target": {
++            "limit": 100,
++            "matchAny": false,
++            "tags": [],
++            "type": "dashboard"
++          },
++          "type": "dashboard"
++        }
++      ]
++    },
++    "description": "Telegraf / InfluxDB / Grafana as syslog receiver",
++    "editable": true,
++    "fiscalYearStartMonth": 0,
++    "gnetId": 12433,
++    "graphTooltip": 0,
++    "id": 2,
++    "iteration": 1634913100122,
++    "links": [],
++    "liveNow": false,
++    "panels": [
++      {
++        "aliasColors": {},
++        "bars": true,
++        "dashLength": 10,
++        "dashes": false,
++        "datasource": "InfluxDB-telegraf",
++        "decimals": 0,
++        "fill": 1,
++        "fillGradient": 0,
++        "gridPos": {
++          "h": 7,
++          "w": 24,
++          "x": 0,
++          "y": 0
++        },
++        "hiddenSeries": false,
++        "id": 10,
++        "interval": "",
++        "legend": {
++          "alignAsTable": true,
++          "avg": true,
++          "current": false,
++          "max": true,
++          "min": false,
++          "rightSide": true,
++          "show": true,
++          "sort": null,
++          "sortDesc": null,
++          "total": true,
++          "values": true
++        },
++        "lines": false,
++        "linewidth": 1,
++        "links": [],
++        "nullPointMode": "connected",
++        "options": {
++          "alertThreshold": true
++        },
++        "percentage": false,
++        "pluginVersion": "8.2.2",
++        "pointradius": 2,
++        "points": false,
++        "renderer": "flot",
++        "seriesOverrides": [
++          {
++            "alias": "Info",
++            "color": "rgb(80, 80, 80)",
++            "stack": "A"
++          },
++          {
++            "alias": "Notice",
++            "color": "rgb(182, 182, 182)",
++            "stack": "A"
++          },
++          {
++            "alias": "Warning",
++            "color": "#E0B400",
++            "stack": "A"
++          },
++          {
++            "alias": "Error",
++            "color": "#FF780A",
++            "stack": "A"
++          },
++          {
++            "alias": "Critical",
++            "color": "#E02F44",
++            "stack": "A"
++          },
++          {
++            "alias": "Alert",
++            "color": "#8F3BB8",
++            "stack": "A"
++          },
++          {
++            "alias": "Emergency",
++            "color": "#8F3BB8",
++            "stack": "A"
++          }
++        ],
++        "spaceLength": 10,
++        "stack": false,
++        "steppedLine": false,
++        "targets": [
++          {
++            "alias": "Info",
++            "groupBy": [
++              {
++                "params": [
++                  "1m"
++                ],
++                "type": "time"
++              },
++              {
++                "params": [
++                  "null"
++                ],
++                "type": "fill"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "A",
++            "resultFormat": "time_series",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                },
++                {
++                  "params": [],
++                  "type": "count"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "severity",
++                "operator": "=",
++                "value": "info"
++              },
++              {
++                "condition": "AND",
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          },
++          {
++            "alias": "Notice",
++            "groupBy": [
++              {
++                "params": [
++                  "1m"
++                ],
++                "type": "time"
++              },
++              {
++                "params": [
++                  "null"
++                ],
++                "type": "fill"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "B",
++            "resultFormat": "time_series",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                },
++                {
++                  "params": [],
++                  "type": "count"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "severity",
++                "operator": "=",
++                "value": "notice"
++              },
++              {
++                "condition": "AND",
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          },
++          {
++            "alias": "Warning",
++            "groupBy": [
++              {
++                "params": [
++                  "1m"
++                ],
++                "type": "time"
++              },
++              {
++                "params": [
++                  "null"
++                ],
++                "type": "fill"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "D",
++            "resultFormat": "time_series",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                },
++                {
++                  "params": [],
++                  "type": "count"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "severity",
++                "operator": "=",
++                "value": "warning"
++              },
++              {
++                "condition": "AND",
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          },
++          {
++            "alias": "Error",
++            "groupBy": [
++              {
++                "params": [
++                  "1m"
++                ],
++                "type": "time"
++              },
++              {
++                "params": [
++                  "null"
++                ],
++                "type": "fill"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "C",
++            "resultFormat": "time_series",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                },
++                {
++                  "params": [],
++                  "type": "count"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "severity",
++                "operator": "=",
++                "value": "err"
++              },
++              {
++                "condition": "AND",
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          },
++          {
++            "alias": "Critical",
++            "groupBy": [
++              {
++                "params": [
++                  "1m"
++                ],
++                "type": "time"
++              },
++              {
++                "params": [
++                  "null"
++                ],
++                "type": "fill"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "E",
++            "resultFormat": "time_series",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                },
++                {
++                  "params": [],
++                  "type": "count"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "severity",
++                "operator": "=",
++                "value": "crit"
++              },
++              {
++                "condition": "AND",
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          },
++          {
++            "alias": "Alert",
++            "groupBy": [
++              {
++                "params": [
++                  "1m"
++                ],
++                "type": "time"
++              },
++              {
++                "params": [
++                  "null"
++                ],
++                "type": "fill"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "F",
++            "resultFormat": "time_series",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                },
++                {
++                  "params": [],
++                  "type": "count"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "severity",
++                "operator": "=",
++                "value": "alert"
++              },
++              {
++                "condition": "AND",
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          },
++          {
++            "alias": "Emergency",
++            "groupBy": [
++              {
++                "params": [
++                  "1m"
++                ],
++                "type": "time"
++              },
++              {
++                "params": [
++                  "null"
++                ],
++                "type": "fill"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "G",
++            "resultFormat": "time_series",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                },
++                {
++                  "params": [],
++                  "type": "count"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "severity",
++                "operator": "=",
++                "value": "emerg"
++              },
++              {
++                "condition": "AND",
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          }
++        ],
++        "thresholds": [],
++        "timeFrom": null,
++        "timeRegions": [],
++        "timeShift": null,
++        "title": "syslog count",
++        "tooltip": {
++          "shared": true,
++          "sort": 0,
++          "value_type": "individual"
++        },
++        "type": "graph",
++        "xaxis": {
++          "buckets": null,
++          "mode": "time",
++          "name": null,
++          "show": true,
++          "values": []
++        },
++        "yaxes": [
++          {
++            "decimals": 0,
++            "format": "none",
++            "label": "Messages / min",
++            "logBase": 1,
++            "max": null,
++            "min": null,
++            "show": true
++          },
++          {
++            "format": "short",
++            "label": null,
++            "logBase": 1,
++            "max": null,
++            "min": null,
++            "show": false
++          }
++        ],
++        "yaxis": {
++          "align": false,
++          "alignLevel": null
++        }
++      },
++      {
++        "datasource": "InfluxDB-telegraf",
++        "description": "",
++        "fieldConfig": {
++          "defaults": {
++            "color": {
++              "mode": "thresholds"
++            },
++            "custom": {
++              "align": "left",
++              "displayMode": "auto",
++              "filterable": false
++            },
++            "mappings": [],
++            "thresholds": {
++              "mode": "absolute",
++              "steps": [
++                {
++                  "color": "dark-purple",
++                  "value": null
++                },
++                {
++                  "color": "dark-red",
++                  "value": 2
++                },
++                {
++                  "color": "dark-orange",
++                  "value": 3
++                },
++                {
++                  "color": "dark-yellow",
++                  "value": 4
++                },
++                {
++                  "color": "rgb(150, 150, 150)",
++                  "value": 5
++                },
++                {
++                  "color": "rgb(51, 51, 51)",
++                  "value": 6
++                },
++                {
++                  "color": "rgb(5, 5, 5)",
++                  "value": 7
++                }
++              ]
++            }
++          },
++          "overrides": [
++            {
++              "matcher": {
++                "id": "byName",
++                "options": "severity_code"
++              },
++              "properties": [
++                {
++                  "id": "mappings",
++                  "value": [
++                    {
++                      "options": {
++                        "0": {
++                          "text": "Emergency"
++                        },
++                        "1": {
++                          "text": "Alert"
++                        },
++                        "2": {
++                          "text": "Critical"
++                        },
++                        "3": {
++                          "text": "Error"
++                        },
++                        "4": {
++                          "text": "Warning"
++                        },
++                        "5": {
++                          "text": "Notice"
++                        },
++                        "6": {
++                          "text": "Info"
++                        },
++                        "7": {
++                          "text": "Debug"
++                        }
++                      },
++                      "type": "value"
++                    }
++                  ]
++                },
++                {
++                  "id": "custom.displayMode",
++                  "value": "color-background"
++                },
++                {
++                  "id": "custom.width",
++                  "value": 119
++                }
++              ]
++            },
++            {
++              "matcher": {
++                "id": "byName",
++                "options": "Time"
++              },
++              "properties": [
++                {
++                  "id": "custom.width",
++                  "value": 163
++                }
++              ]
++            },
++            {
++              "matcher": {
++                "id": "byName",
++                "options": "hostname"
++              },
++              "properties": [
++                {
++                  "id": "custom.width",
++                  "value": 194
++                }
++              ]
++            },
++            {
++              "matcher": {
++                "id": "byName",
++                "options": "appname"
++              },
++              "properties": [
++                {
++                  "id": "custom.width",
++                  "value": 264
++                }
++              ]
++            }
++          ]
++        },
++        "gridPos": {
++          "h": 24,
++          "w": 24,
++          "x": 0,
++          "y": 7
++        },
++        "id": 12,
++        "options": {
++          "showHeader": true,
++          "sortBy": [
++            {
++              "desc": true,
++              "displayName": "Time"
++            }
++          ]
++        },
++        "pluginVersion": "8.2.2",
++        "targets": [
++          {
++            "groupBy": [
++              {
++                "params": [
++                  "hostname"
++                ],
++                "type": "tag"
++              },
++              {
++                "params": [
++                  "appname"
++                ],
++                "type": "tag"
++              }
++            ],
++            "measurement": "syslog",
++            "orderByTime": "ASC",
++            "policy": "default",
++            "refId": "A",
++            "resultFormat": "table",
++            "select": [
++              [
++                {
++                  "params": [
++                    "severity_code"
++                  ],
++                  "type": "field"
++                }
++              ],
++              [
++                {
++                  "params": [
++                    "message"
++                  ],
++                  "type": "field"
++                }
++              ]
++            ],
++            "tags": [
++              {
++                "key": "hostname",
++                "operator": "=~",
++                "value": "/^$hostname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "appname",
++                "operator": "=~",
++                "value": "/^$appname$/"
++              },
++              {
++                "condition": "AND",
++                "key": "severity",
++                "operator": "=~",
++                "value": "/^$severity$/"
++              },
++              {
++                "condition": "AND",
++                "key": "message",
++                "operator": "=~",
++                "value": "/$Query/"
++              }
++            ]
++          }
++        ],
++        "timeFrom": null,
++        "timeShift": null,
++        "title": "Syslog Messages",
++        "type": "table"
++      }
++    ],
++    "refresh": "5s",
++    "schemaVersion": 31,
++    "style": "dark",
++    "tags": [],
++    "templating": {
++      "list": [
++        {
++          "allValue": "",
++          "current": {
++            "selected": false,
++            "text": "All",
++            "value": "$__all"
++          },
++          "datasource": "InfluxDB-telegraf",
++          "definition": "SHOW TAG VALUES FROM syslog WITH KEY=appname",
++          "description": null,
++          "error": null,
++          "hide": 0,
++          "includeAll": true,
++          "label": "Appname",
++          "multi": true,
++          "name": "appname",
++          "options": [],
++          "query": "SHOW TAG VALUES FROM syslog WITH KEY=appname",
++          "refresh": 2,
++          "regex": "",
++          "skipUrlSync": false,
++          "sort": 1,
++          "tagValuesQuery": "",
++          "tagsQuery": "",
++          "type": "query",
++          "useTags": false
++        },
++        {
++          "allValue": "",
++          "current": {
++            "selected": false,
++            "text": "All",
++            "value": "$__all"
++          },
++          "datasource": "InfluxDB-telegraf",
++          "definition": "SHOW TAG VALUES FROM syslog WITH KEY=hostname",
++          "description": null,
++          "error": null,
++          "hide": 0,
++          "includeAll": true,
++          "label": "Hostname",
++          "multi": true,
++          "name": "hostname",
++          "options": [],
++          "query": "SHOW TAG VALUES FROM syslog WITH KEY=hostname",
++          "refresh": 2,
++          "regex": "",
++          "skipUrlSync": false,
++          "sort": 1,
++          "tagValuesQuery": "",
++          "tagsQuery": "",
++          "type": "query",
++          "useTags": false
++        },
++        {
++          "allValue": "",
++          "current": {
++            "selected": false,
++            "text": "All",
++            "value": "$__all"
++          },
++          "datasource": "InfluxDB-telegraf",
++          "definition": "SHOW TAG VALUES FROM syslog WITH KEY=severity",
++          "description": null,
++          "error": null,
++          "hide": 0,
++          "includeAll": true,
++          "label": "Severity",
++          "multi": true,
++          "name": "severity",
++          "options": [],
++          "query": "SHOW TAG VALUES FROM syslog WITH KEY=severity",
++          "refresh": 2,
++          "regex": "",
++          "skipUrlSync": false,
++          "sort": 0,
++          "tagValuesQuery": "",
++          "tagsQuery": "",
++          "type": "query",
++          "useTags": false
++        },
++        {
++          "current": {
++            "selected": false,
++            "text": "",
++            "value": ""
++          },
++          "description": "Querystring",
++          "error": null,
++          "hide": 0,
++          "label": "MessageQuery",
++          "name": "Query",
++          "options": [
++            {
++              "selected": true,
++              "text": "",
++              "value": ""
++            }
++          ],
++          "query": "",
++          "skipUrlSync": false,
++          "type": "textbox"
++        }
++      ]
++    },
++    "time": {
++      "from": "now-1h",
++      "to": "now"
++    },
++    "timepicker": {
++      "refresh_intervals": [
++        "5s",
++        " 10s",
++        " 30s",
++        " 1m",
++        " 5m"
++      ],
++      "time_options": [
++        "5m",
++        "15m",
++        "1h",
++        "6h",
++        "12h",
++        "24h",
++        "2d",
++        "7d",
++        "30d"
++      ]
++    },
++    "timezone": "",
++    "title": "Syslog",
++    "uid": "TIYeHqRgZ",
++    "version": 1
++  }
+\ No newline at end of file
+
+changed: [vm3] => (item=syslog.json)
+
+TASK [grafana : Grafana Docker Container] **************************************
+--- before
++++ after
+@@ -1,4 +1,4 @@
+ {
+-    "exists": false,
+-    "running": false
++    "exists": true,
++    "running": true
+ }
+
+changed: [vm3]
+
+PLAY RECAP *********************************************************************
+vm1                        : ok=79   changed=64   unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+vm2                        : ok=78   changed=64   unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+vm3                        : ok=74   changed=61   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
++ ansible-playbook infra.yaml --diff
+
+PLAY [Init] ********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
+TASK [init : Update APT cache] *************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [init : Inventory hostname] ***********************************************
+ok: [vm2]
+ok: [vm3]
+ok: [vm1]
+
+TASK [backup : backup] *********************************************************
+ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
+TASK [backup : create 'restore' directory] *************************************
+ok: [vm2]
+ok: [vm1]
+ok: [vm3]
+
+TASK [backup : Duplicity] ******************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [backup : Create template known_hosts] ************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [node_exporter : prometheus node exporter] ********************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [node_exporter : Start prometheus node exporters on boot] *****************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [node_exporter : Pause for 10 seconds] ************************************
+skipping: [vm1]
+
+TASK [rsyslog : copy 10-telegraf.conf] *****************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+PLAY [Collect info about all VMs] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm2]
+ok: [vm3]
+ok: [vm1]
+
+TASK [setup] *******************************************************************
+ok: [vm3]
+ok: [vm1]
+ok: [vm2]
+
+PLAY [DNS server] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
+TASK [bind : bind package] *****************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [bind : copy template named.conf.options.j2] ******************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [bind : copy template db.reily] *******************************************
+skipping: [vm1]
+skipping: [vm2]
+ok: [vm3]
+
+TASK [bind : copy template db.domain.reverse] **********************************
+skipping: [vm1]
+skipping: [vm2]
+ok: [vm3]
+
+TASK [bind : copy template named.conf.local.j2] ********************************
+ok: [vm3]
+ok: [vm1]
+ok: [vm2]
+
+TASK [bind_exporter : prometheus bind exporter] ********************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [bind_exporter : Start prometheus bind exporters on boot] *****************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+PLAY [DNS records] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm3]
+
+TASK [dns_records : Set A records] *********************************************
+ok: [vm3] => (item={'key': 'backup', 'value': '192.168.42.156'})
+
+TASK [dns_records : Set CNAME records] *****************************************
+ok: [vm3] => (item={'key': 'grafana', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'influxdb', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'lb1', 'value': 'vm1'})
+ok: [vm3] => (item={'key': 'lb2', 'value': 'vm2'})
+ok: [vm3] => (item={'key': 'mysql1', 'value': 'vm1'})
+ok: [vm3] => (item={'key': 'mysql2', 'value': 'vm2'})
+ok: [vm3] => (item={'key': 'ns1', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'prometheus', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'web1', 'value': 'vm1'})
+ok: [vm3] => (item={'key': 'web2', 'value': 'vm2'})
+
+PLAY [change nameserver on vms] ************************************************
+
+TASK [dns_resolv : Stop systemd-resolved] **************************************
+ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
+TASK [dns_resolv : Change resolv.conf] *****************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+PLAY [Database server] *********************************************************
+
+TASK [mysql : install and configure MySQL server] ******************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [mysql : override mysql configuration] ************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : install python3-pymysql] *****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : start mysql-server on boot] **************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : MySQL database] **************************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [mysql : MySQL user] ******************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : Create user exporter] ********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : Create MySQL user for replication] *******************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [mysql : readonly] ********************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_exporter : Move my.cnf.j2 file] ************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [mysql_exporter : Move template] ******************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_exporter : prometheus mysql exporter] ******************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_exporter : Start prometheus mysql exporters on boot] ***************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Create directory] *****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Create user backup] ***************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Move .my.cnf file] ****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Create file mysql-backup] *********************************
+ok: [vm1]
+ok: [vm2]
+
+PLAY [Web server] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [ssl : Install package] ***************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [ssl : Fix ssl bug for docker] ********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [ssl : Restore iptables] **************************************************
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+ok: [vm2]
+ok: [vm1]
+
+TASK [docker : Docker package] *************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [docker : Log into DockerHub] *********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [agama : Create directory] ************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [agama : Install AGAMA] ***************************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [agama : Agama docker image] **********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [agama : Agama Docker Container] ******************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [agama : Agama Docker Container] ******************************************
+ok: [vm1]
+ok: [vm2]
+
+PLAY [HAproxy] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Install HAproxy and Keepalived] ********************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Copy HAproxy conf file] ****************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [haproxy : Copy ha88 file] ************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : HAproxy exporter] **********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Copy HAproxy.scrape-uri] ***************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Start HAproxy on boot] *****************************************
+ok: [vm1] => (item=haproxy)
+ok: [vm2] => (item=haproxy)
+ok: [vm1] => (item=prometheus-haproxy-exporter)
+ok: [vm2] => (item=prometheus-haproxy-exporter)
+
+TASK [keepalived : Install HAproxy and Keepalived] *****************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Copy Keepalived conf file] **********************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Extract exporter into folder] *******************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [keepalived : keepalived exporter service] ********************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [keepalived : Start keepalived on boot] ***********************************
+ok: [vm1] => (item=keepalived)
+ok: [vm2] => (item=keepalived)
+ok: [vm1] => (item=keepalived_exporter)
+ok: [vm2] => (item=keepalived_exporter)
+
+PLAY [Prometheus] **************************************************************
+
+TASK [prometheus : prometheus] *************************************************
+ok: [vm3]
+
+TASK [prometheus : Start prometheus on boot] ***********************************
+ok: [vm3]
+
+TASK [prometheus : Change /etc/default/prometheus] *****************************
+ok: [vm3]
+
+TASK [prometheus : Change /etc/prometheus/prometheus.yml] **********************
+ok: [vm3]
+
+PLAY [Nginx] *******************************************************************
+
+TASK [nginx : nginx and updating] **********************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [nginx : start nginx] *****************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [nginx : replace html] ****************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [nginx : replace default] *************************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [nginx : create exporter] *************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [nginx_exporter : prometheus nginx exporter] ******************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+PLAY [influxDB] ****************************************************************
+
+TASK [influxdb : Add an Apt signing key, uses whichever key is at the URL] *****
+ok: [vm3]
+
+TASK [influxdb : Add specified repository into sources list] *******************
+ok: [vm3]
+
+TASK [influxdb : install influxdb and telegraf] ********************************
+ok: [vm3]
+
+TASK [influxdb : start services] ***********************************************
+ok: [vm3]
+
+TASK [influxdb : start services] ***********************************************
+ok: [vm3]
+
+TASK [influxdb : copy telegraf.conf] *******************************************
+ok: [vm3]
+
+TASK [influxdb : copy influxdb.conf] *******************************************
+ok: [vm3]
+
+TASK [pinger : install fping] **************************************************
+ok: [vm3]
+
+TASK [pinger : install curl] ***************************************************
+ok: [vm3]
+
+TASK [pinger : pinger.sh] ******************************************************
+ok: [vm3]
+
+TASK [pinger : Create directory] ***********************************************
+ok: [vm3]
+
+TASK [pinger : pinger.conf] ****************************************************
+ok: [vm3]
+
+TASK [pinger : pinger service] *************************************************
+ok: [vm3]
+
+TASK [pinger : Start pinger on boot] *******************************************
+ok: [vm3]
+
+TASK [influxdb_exporter : Prometheus influxdb exporter] ************************
+ok: [vm3]
+
+TASK [influxdb_exporter : Copy service template] *******************************
+ok: [vm3]
+
+TASK [influxdb_exporter : Influxdb Exporter] ***********************************
+ok: [vm3]
+
+TASK [influxdb_backup : Create directory] **************************************
+ok: [vm3]
+
+TASK [influxdb_backup : Create file influxdb-backup] ***************************
+ok: [vm3]
+
+PLAY [Grafana] *****************************************************************
+
+TASK [docker : Docker package] *************************************************
+ok: [vm3]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm3]
+
+TASK [docker : Log into DockerHub] *********************************************
+ok: [vm3]
+
+TASK [grafana : Create directories] ********************************************
+ok: [vm3] => (item=/opt/grafana/provisioning/dashboards)
+ok: [vm3] => (item=/opt/grafana/provisioning/datasources)
+
+TASK [grafana : copy grafana ini] **********************************************
+ok: [vm3]
+
+TASK [grafana : copy grafana datasource] ***************************************
+ok: [vm3]
+
+TASK [grafana : copy grafana dashboard] ****************************************
+ok: [vm3]
+
+TASK [grafana : Copy jsons] ****************************************************
+ok: [vm3] => (item=main.json)
+ok: [vm3] => (item=mysql.json)
+ok: [vm3] => (item=syslog.json)
+
+TASK [grafana : Grafana Docker Container] **************************************
+ok: [vm3]
+
+PLAY RECAP *********************************************************************
+vm1                        : ok=67   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+vm2                        : ok=67   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm3                        : ok=63   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
++ ansible all -b -m reboot -a test_command=uptime
+vm3 | CHANGED => {
+    "changed": true,
+    "elapsed": 32,
+    "rebooted": true
+}
+vm2 | CHANGED => {
+    "changed": true,
+    "elapsed": 47,
+    "rebooted": true
+}
+vm1 | CHANGED => {
+    "changed": true,
+    "elapsed": 48,
+    "rebooted": true
+}
++ ansible-playbook infra.yaml --diff
+
+PLAY [Init] ********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm2]
+ok: [vm1]
+ok: [vm3]
+
+TASK [init : Update APT cache] *************************************************
+ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
+TASK [init : Inventory hostname] ***********************************************
+ok: [vm3]
+ok: [vm2]
+ok: [vm1]
+
+TASK [backup : backup] *********************************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [backup : create 'restore' directory] *************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [backup : Duplicity] ******************************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [backup : Create template known_hosts] ************************************
+ok: [vm2]
+ok: [vm3]
+ok: [vm1]
+
+TASK [node_exporter : prometheus node exporter] ********************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [node_exporter : Start prometheus node exporters on boot] *****************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [node_exporter : Pause for 10 seconds] ************************************
+skipping: [vm1]
+
+TASK [rsyslog : copy 10-telegraf.conf] *****************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+PLAY [Collect info about all VMs] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [setup] *******************************************************************
+ok: [vm2]
+ok: [vm3]
+ok: [vm1]
+
+PLAY [DNS server] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [bind : bind package] *****************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [bind : copy template named.conf.options.j2] ******************************
+ok: [vm2]
+ok: [vm1]
+ok: [vm3]
+
+TASK [bind : copy template db.reily] *******************************************
+skipping: [vm1]
+skipping: [vm2]
+ok: [vm3]
+
+TASK [bind : copy template db.domain.reverse] **********************************
+skipping: [vm1]
+skipping: [vm2]
+ok: [vm3]
+
+TASK [bind : copy template named.conf.local.j2] ********************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [bind_exporter : prometheus bind exporter] ********************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [bind_exporter : Start prometheus bind exporters on boot] *****************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+PLAY [DNS records] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm3]
+
+TASK [dns_records : Set A records] *********************************************
+ok: [vm3] => (item={'key': 'backup', 'value': '192.168.42.156'})
+
+TASK [dns_records : Set CNAME records] *****************************************
+ok: [vm3] => (item={'key': 'grafana', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'influxdb', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'lb1', 'value': 'vm1'})
+ok: [vm3] => (item={'key': 'lb2', 'value': 'vm2'})
+ok: [vm3] => (item={'key': 'mysql1', 'value': 'vm1'})
+ok: [vm3] => (item={'key': 'mysql2', 'value': 'vm2'})
+ok: [vm3] => (item={'key': 'ns1', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'prometheus', 'value': 'vm3'})
+ok: [vm3] => (item={'key': 'web1', 'value': 'vm1'})
+ok: [vm3] => (item={'key': 'web2', 'value': 'vm2'})
+
+PLAY [change nameserver on vms] ************************************************
+
+TASK [dns_resolv : Stop systemd-resolved] **************************************
+ok: [vm1]
+ok: [vm3]
+ok: [vm2]
+
+TASK [dns_resolv : Change resolv.conf] *****************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+PLAY [Database server] *********************************************************
+
+TASK [mysql : install and configure MySQL server] ******************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : override mysql configuration] ************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : install python3-pymysql] *****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : start mysql-server on boot] **************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : MySQL database] **************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : MySQL user] ******************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : Create user exporter] ********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : Create MySQL user for replication] *******************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql : readonly] ********************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_exporter : Move my.cnf.j2 file] ************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [mysql_exporter : Move template] ******************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [mysql_exporter : prometheus mysql exporter] ******************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [mysql_exporter : Start prometheus mysql exporters on boot] ***************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Create directory] *****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Create user backup] ***************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Move .my.cnf file] ****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [mysql_backup : Create file mysql-backup] *********************************
+ok: [vm1]
+ok: [vm2]
+
+PLAY [Web server] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [ssl : Install package] ***************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [ssl : Fix ssl bug for docker] ********************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [ssl : Restore iptables] **************************************************
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+[WARNING]: Attempts to restore iptables state without rollback in case of
+mistake may lead the ansible controller to loose access to the hosts and never
+regain it before fixing firewall rules through a serial console, or any other
+way except SSH. Please set task attribute 'poll' (=15) to 0, and 'async' (=0)
+to a value >2 and not greater than 'ansible_timeout' (=10) (recommended).
+ok: [vm1]
+ok: [vm2]
+
+TASK [docker : Docker package] *************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [docker : Log into DockerHub] *********************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [agama : Create directory] ************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [agama : Install AGAMA] ***************************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [agama : Agama docker image] **********************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [agama : Agama Docker Container] ******************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [agama : Agama Docker Container] ******************************************
+ok: [vm1]
+ok: [vm2]
+
+PLAY [HAproxy] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Install HAproxy and Keepalived] ********************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Copy HAproxy conf file] ****************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Copy ha88 file] ************************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [haproxy : HAproxy exporter] **********************************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [haproxy : Copy HAproxy.scrape-uri] ***************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [haproxy : Start HAproxy on boot] *****************************************
+ok: [vm1] => (item=haproxy)
+ok: [vm2] => (item=haproxy)
+ok: [vm1] => (item=prometheus-haproxy-exporter)
+ok: [vm2] => (item=prometheus-haproxy-exporter)
+
+TASK [keepalived : Install HAproxy and Keepalived] *****************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Copy Keepalived conf file] **********************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Extract exporter into folder] *******************************
+ok: [vm2]
+ok: [vm1]
+
+TASK [keepalived : keepalived exporter service] ********************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [keepalived : Start keepalived on boot] ***********************************
+ok: [vm1] => (item=keepalived)
+ok: [vm2] => (item=keepalived)
+ok: [vm1] => (item=keepalived_exporter)
+ok: [vm2] => (item=keepalived_exporter)
+
+PLAY [Prometheus] **************************************************************
+
+TASK [prometheus : prometheus] *************************************************
+ok: [vm3]
+
+TASK [prometheus : Start prometheus on boot] ***********************************
+ok: [vm3]
+
+TASK [prometheus : Change /etc/default/prometheus] *****************************
+ok: [vm3]
+
+TASK [prometheus : Change /etc/prometheus/prometheus.yml] **********************
+ok: [vm3]
+
+PLAY [Nginx] *******************************************************************
+
+TASK [nginx : nginx and updating] **********************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [nginx : start nginx] *****************************************************
+ok: [vm2]
+ok: [vm1]
+ok: [vm3]
+
+TASK [nginx : replace html] ****************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [nginx : replace default] *************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [nginx : create exporter] *************************************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+TASK [nginx_exporter : prometheus nginx exporter] ******************************
+ok: [vm1]
+ok: [vm2]
+ok: [vm3]
+
+PLAY [influxDB] ****************************************************************
+
+TASK [influxdb : Add an Apt signing key, uses whichever key is at the URL] *****
+ok: [vm3]
+
+TASK [influxdb : Add specified repository into sources list] *******************
+ok: [vm3]
+
+TASK [influxdb : install influxdb and telegraf] ********************************
+ok: [vm3]
+
+TASK [influxdb : start services] ***********************************************
+ok: [vm3]
+
+TASK [influxdb : start services] ***********************************************
+ok: [vm3]
+
+TASK [influxdb : copy telegraf.conf] *******************************************
+ok: [vm3]
+
+TASK [influxdb : copy influxdb.conf] *******************************************
+ok: [vm3]
+
+TASK [pinger : install fping] **************************************************
+ok: [vm3]
+
+TASK [pinger : install curl] ***************************************************
+ok: [vm3]
+
+TASK [pinger : pinger.sh] ******************************************************
+ok: [vm3]
+
+TASK [pinger : Create directory] ***********************************************
+ok: [vm3]
+
+TASK [pinger : pinger.conf] ****************************************************
+ok: [vm3]
+
+TASK [pinger : pinger service] *************************************************
+ok: [vm3]
+
+TASK [pinger : Start pinger on boot] *******************************************
+ok: [vm3]
+
+TASK [influxdb_exporter : Prometheus influxdb exporter] ************************
+ok: [vm3]
+
+TASK [influxdb_exporter : Copy service template] *******************************
+ok: [vm3]
+
+TASK [influxdb_exporter : Influxdb Exporter] ***********************************
+ok: [vm3]
+
+TASK [influxdb_backup : Create directory] **************************************
+ok: [vm3]
+
+TASK [influxdb_backup : Create file influxdb-backup] ***************************
+ok: [vm3]
+
+PLAY [Grafana] *****************************************************************
+
+TASK [docker : Docker package] *************************************************
+ok: [vm3]
+
+TASK [docker : Docker service] *************************************************
+ok: [vm3]
+
+TASK [docker : Log into DockerHub] *********************************************
+ok: [vm3]
+
+TASK [grafana : Create directories] ********************************************
+ok: [vm3] => (item=/opt/grafana/provisioning/dashboards)
+ok: [vm3] => (item=/opt/grafana/provisioning/datasources)
+
+TASK [grafana : copy grafana ini] **********************************************
+ok: [vm3]
+
+TASK [grafana : copy grafana datasource] ***************************************
+ok: [vm3]
+
+TASK [grafana : copy grafana dashboard] ****************************************
+ok: [vm3]
+
+TASK [grafana : Copy jsons] ****************************************************
+ok: [vm3] => (item=main.json)
+ok: [vm3] => (item=mysql.json)
+ok: [vm3] => (item=syslog.json)
+
+TASK [grafana : Grafana Docker Container] **************************************
+ok: [vm3]
+
+PLAY RECAP *********************************************************************
+vm1                        : ok=67   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+vm2                        : ok=67   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm3                        : ok=63   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
++ date
+Wed Dec 15 10:08:55 EET 2021
