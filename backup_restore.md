@@ -27,7 +27,7 @@ To restore the backup you will need to delete existing telegraf database first. 
 ```cd```<br>
 ```service telegraf stop```<br>
 ```influx -execute 'DROP DATABASE telegraf'```<br>
-```influxd restore -portable -database telegraf /home/backup/influxdb```
+```influxd restore -portable -database telegraf /home/backup/restore```
 
 ----------------------------------------
 
