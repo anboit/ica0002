@@ -13,7 +13,7 @@ First one restores the backup from the server, run this command as backup user:<
 
 Second uploads the restore backup onto the machine, run this command from root user:<br>
 ```cd```<br>
-```mysql agama < /home/backup/mysql/agama.sql```
+```mysql agama < /home/backup/restore/agama.sql```
 
 ----------------------------------------
 
